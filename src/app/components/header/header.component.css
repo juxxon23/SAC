@@ -1,0 +1,19 @@
+.blue-sac {
+	background-color: #001935;
+}
+
+.head {
+	padding: 1%;
+}
+
+.second-head {
+	border: 1px solid black;
+	margin: 0 0 2% 0;
+	padding: 0.5%;
+	background-color: #e3e6eb;
+}
+
+img {
+	margin: 0 0 0 1%;
+	width: 60px;
+}
