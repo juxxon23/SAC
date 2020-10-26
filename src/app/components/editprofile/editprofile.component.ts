@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 
 @Component({
   selector: 'app-editprofile',
@@ -9,7 +10,11 @@ export class EditprofileComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  options = {}
+
+  ngOnInit(){
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, this.options);
   }
 
 }
