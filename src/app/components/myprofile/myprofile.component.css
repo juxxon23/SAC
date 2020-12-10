@@ -1,0 +1,84 @@
+.contain-myprofile {
+    border: 2px solid black;
+    padding: 1% 0 5% 0;
+}
+
+.container {
+    width: 400%;
+}
+
+.blue-sac {
+    color: #001935;
+}
+
+.orange-sac {
+    background-color: #fc7323;
+    font-weight: bold;
+}
+
+.gray-sac {
+    background-color: #e3e6eb;
+    color: #000;
+    font-weight: bold;
+}
+
+.info-basic {
+    border: 1px solid black;
+    padding: 1% 2% 1% 2%;
+    background-color: #e3e6eb;
+    border-radius: 3px;
+    margin: 0 0 0.5% 0;
+}
+
+.welcome {
+    font-weight: 900;
+}
+
+.second-contain {
+    /* Falta concluir el contenedor primario del signin basico */
+    border: 1px solid black;
+}
+
+i {
+    margin: 0 0 0 10%;
+}
+
+h5 {
+    padding: 0 10% 0 0;
+}
+
+h2 {
+    margin-top: 1%;
+    margin-bottom: 4%;
+}
+
+label {
+    color: black;
+    padding: 0 20% 0 0;
+}
+
+.subBtn {
+    border: 1px solid black;
+}
+
+.boton {
+    margin: 5% 0 0 0;
+}
+
+.boton2 {
+    margin-top: 5%;
+}
+
+.tabla1 {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.tabla2 {
+    border: 1px solid black;
+}
+
+.transformed {
+    /* idéntico a rotateZ(45deg); */
+    transform: rotate(180deg);
+}

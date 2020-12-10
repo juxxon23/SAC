@@ -1,128 +1,93 @@
 <div class="container">
-	<div class="row">
-		<div class="container">
-			<div class="info-edit">
-				<h4 class="edit">Edita tu perfil</h4>
-				<p>Asi podremos automatizar campos cuando diligencies tus actas.</p>
-			</div>
-			<div> <!-- class="second-contain" -->
-				<form class="col s12 contain-edit">
-					<div class="row optional">
-						<div class="col s12">
-							<p>Todos los campos son opcionales**</p>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">face</i>
-							<input id="name_user" type="text" class="validate">
-							<label for="name_user">Nombres</label>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">face</i>
-							<input id="lastname" type="text" class="validate">
-							<label for="lastname">Apellidos</label>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">call</i>
-							<input id="number_phone" type="tel" class="validate">
-							<label for="number_phone">Celular/Ext. SENA</label>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">call</i>
-							<input id="number_phone" type="tel" class="validate">
-							<label for="number_phone">Celular/Ext. SENA</label>
-						</div>
-					</div>
-					<!--
-					<div class="row center">
-						 <div class="input-field col s12">
-						 	 <i class="material-icons prefix blue-sac">flag</i>
-						 	 <select>
-						 	 	 <option value="" disabled selected>Seleccion su regional</option>
-						 	 	 <option value="1">Quindio</option>
-						 	 	 <option value="2">Antioquia</option>
-						 	 	 <option value="3">Putumayo</option>
-						 	 </select>	
-							 <label>Regional</label>
-						</div>
-					</div>
-					<div class="row center">
-						 <div class="input-field col s12"> 	 
-						 	 <i class="material-icons prefix blue-sac">domain</i>
-						 	 <select>
-						 	 	 <option value="" disabled selected>Seleccion su centro</option>
-						 	 	 <option value="1">Comercio y turismo</option>
-						 	 	 <option value="2">Centro 2</option>
-						 	 	 <option value="3">Centro 3</option>
-						 	 </select>
-							 <label>Centro</label>
-						</div>
-					</div>
-					-->
-					<div class="row center">
-						<div class="input-field col s6">
-							 <i class="material-icons prefix blue-sac">flag</i>
-							 <input id="regional" type="text" class="validate">
-							 <label for="regional">Regional</label>
-						</div>
-					</div>
+    <div class="row">
+        <div class="container">
+            <div class="info-edit">
+                <h4 class="edit">Edita tu perfil</h4>
+                <p>Asi podremos automatizar campos cuando diligencies tus actas.</p>
+            </div>
+            <div>
+                <!-- class="second-contain" -->
+                <form class="col s12 contain-edit">
+                    <div class="row ">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix blue-sac">face</i>
+                            <input id="name_user" type="text" class="validate">
+                            <label for="name_user">Nombres</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix blue-sac">face</i>
+                            <input id="lastname" type="text" class="validate">
+                            <label for="lastname">Apellidos</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix blue-sac">call</i>
+                            <input id="number_phone" type="tel" class="validate">
+                            <label for="number_phone">Celular/Ext. SENA</label>
+                        </div>
+                        <i class="material-icons left blue-sac">flag</i>
+                        <div class="input-field col s5">
+                            <select>
+                                <option value="" disabled selected>Seleccion su regional</option>
+                                <option value="1">Quindio</option>
+                                <option value="2">Antioquia</option>
+                                <option value="3">Putumayo</option>
+						 	              </select>
+                            <label>Regional</label>
+                        </div>
+                    </div>
+                    <div class="row">
 
-					<div class="row center">
-						<div class="input-field col s6">
-							 <i class="material-icons prefix blue-sac">domain</i>
-							 <input id="regional_center" type="text" class="validate">
-							 <label for="regional_center">Centro</label>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">history_edu</i>
-							<textarea id="competencies" class="materialize-textarea"></textarea>
-          					<label for="competencies">Competencias</label>
-						</div>
-						<a class="btn-floating waves-effect waves-light orange-sac more">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-					<div class="row center">
-						<div class="input-field col s6">
-							<i class="material-icons prefix blue-sac">military_tech</i>
-							<textarea id="results" class="materialize-textarea"></textarea>
-          					<label for="results">Resultados</label>
-						</div>
-						<a class="btn-floating waves-effect waves-light orange-sac more">
-							<i class="material-icons">add</i>
-						</a>
-					</div>
-					<div class="row center">
-						<div class="col s6">
-							<p>Tipo de vinculación</p>
-							 <p>
-   							   <label>
-   							     <input name="1" type="radio" checked/>
-   							     <span>Planta</span>
-   							   </label>
-   							 </p>
-   							 <p>
-   							   <label>
-   							     <input name="2" type="radio"/>
-   							     <span>Contratista</span>
-   							   </label>
-   							 </p>
-						</div>
-					</div>
-					<div class="center-align">
-						<a class="waves-effect waves-light btn orange-sac" routerLink="/home">Guardar</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                        <i class="material-icons left blue-sac">domain</i>
+                        <div class="input-field col s5">
+                            <select>
+                                <option value="" disabled selected>Seleccion su centro</option>
+                                <option value="1">Comercio y turismo</option>
+                                <option value="2">Centro 2</option>
+                                <option value="3">Centro 3</option>
+						 	              </select>
+                            <label>Centro</label>
+                        </div>
+                        <div class="input-field col s5 co">
+                            <i class="material-icons prefix blue-sac">history_edu</i>
+                            <a class="btn-floating waves-effect waves-light orange-sac more">
+                                <i class="material-icons">add</i>
+                            </a>
+                            <textarea id="competencies" class="materialize-textarea"></textarea>
+                            <label for="competencies">Competencias </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s5">
+                            <i class="material-icons prefix blue-sac">military_tech</i>
+                            <a class="btn-floating waves-effect waves-light orange-sac more right">
+                                <i class="material-icons">add</i>
+                            </a>
+                            <textarea id="results" class="materialize-textarea"></textarea>
+                            <label for="results">Resultados</label>
+                        </div>
+                        <div class="col s5 vinculacion">
+                            <p>Tipo de vinculación</p>
+                            <p>
+                                <label>
+                                <input name="1" type="radio" checked/>
+                                <span>Planta</span>
+                              </label>
+                            </p>
+                            <p>
+                                <label>
+                                <input name="2" type="radio"/>
+                                <span>Contratista</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="center-align boton1">
+                        <a class="waves-effect waves-light btn orange-sac" routerLink="/home">Guardar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
