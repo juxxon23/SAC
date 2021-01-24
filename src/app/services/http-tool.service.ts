@@ -19,7 +19,6 @@ export class HttpToolService {
     if (data) {
       const header = new HttpHeaders().set('id_a', data);
       config.headers = header;
-      console.log(config);
     }
     return this.http.get(url, config);
   }

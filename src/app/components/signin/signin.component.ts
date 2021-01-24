@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
   ) {}
 
   url_signin: string = 'http://127.0.0.1:5000/signin';
-  dateEx: JSON;
+  dataEx: JSON;
   state: string;
   error: any;
   signin: FormGroup;
@@ -30,14 +30,6 @@ export class SigninComponent implements OnInit {
       document_u: ['', Validators.required],
       password_u: ['', Validators.required],
       password_c: ['', Validators.required],
-      name_u: '',
-      lastname_u: '',
-      phone_u: '',
-      regional_u: '',
-      centro_u: '',
-      competencies_u: '',
-      results_u: '',
-      bonding_type: '',
     });
   }
 
@@ -46,9 +38,9 @@ export class SigninComponent implements OnInit {
       var form = this.signin.value;
       delete form.password_c;
       this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
-        this.dateEx = data;
-        console.log(this.dateEx);
-        this.state = this.dateEx['state'];
+        this.dataEx = data;
+        console.log(this.dataEx);
+        this.state = this.dataEx['state'];
         switch (this.state) {
           case 'ok':
             this.spinner.llamarSpinner();

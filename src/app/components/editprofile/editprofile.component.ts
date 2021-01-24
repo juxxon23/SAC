@@ -15,6 +15,7 @@ export class EditprofileComponent implements OnInit {
   ngOnInit(){
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, this.options);
+    console.log(localStorage.getItem('document_u'['document_u']))
   }
 
 }
