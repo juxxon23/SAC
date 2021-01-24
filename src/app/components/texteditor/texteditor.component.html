@@ -1,0 +1,39 @@
+<div class="menu-container">
+  <div class="menu-doc">
+    <ul>
+      <li class="menu-doc-text">
+        <h3>Opciones</h3>
+      </li>
+      <li><button class="menu-button-doc" (click)="createDoc()">Crear Documento</button></li>
+      <li><button class="menu-button-doc" (click)="getDocById()">Obtener documento</button></li>
+      <li><button class="menu-button-doc" (click)="saveDoc()">Guardar</button></li>
+      <li><button class="menu-button-doc" (click)="getAllDocs()">Mis documentos</button></li>
+    </ul>
+   
+  </div>
+  <editor apiKey="6o8br645ls443y35hyve8zrpx9lfo9zqpvfca8ig4cz65ac7" [init]="{
+    height: 500,
+    menubar: false,
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar:
+      'undo redo | formatselect | bold italic backcolor | \
+      alignleft aligncenter alignright alignjustify | \
+      bullist numlist outdent indent | removeformat | help'
+  }" (onSelectionChange)="editorContent($event)" id="text-editor"></editor>
+  <div>
+    <table *ngIf="table_state">
+      <tr>
+        <th *ngFor= "let column of header_list">
+          {{column}}
+        </th>
+      </tr>
+      <tr *ngFor="let doc of rows; index as i">
+        <td>{{doc["_id"]}}</td>
+        <td>{{doc["document_u"]}}</td>
+    </table>
+  </div>
+</div>
