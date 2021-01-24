@@ -4,19 +4,33 @@
 .menu-doc {
     float: left;
     width: auto;
-    height: 400px;
+    height: auto;
 }
 
 .menu-button-doc {
-    width: 70%;
-    margin: 1% 1% 1% 12%;
+    width: 100%;
+    margin: 2% 0;
 }
-.menu-doc-text {
+.menu-button-editor {
+    width: auto;
+    margin: 1%;
+}
+.center {
     text-align: center;
-    margin: 1% 0 5% 0;
+}
+.editor-container {
+    padding: 0;
+    margin: 0;
+}
+.orange-sac {
+	background-color: #fc7323;
+}
+.blue-sac {
+	background-color: #001935;
 }
 #text-editor {
     margin: 0 1%;
     width: auto;
+    height: auto;
 }
 

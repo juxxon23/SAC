@@ -1,17 +1,14 @@
-<div class="menu-container">
-  <div class="menu-doc">
-    <ul>
-      <li class="menu-doc-text">
-        <h3>Opciones</h3>
-      </li>
-      <li><button class="menu-button-doc" (click)="createDoc()">Crear Documento</button></li>
-      <li><button class="menu-button-doc" (click)="getDocById()">Obtener documento</button></li>
-      <li><button class="menu-button-doc" (click)="saveDoc()">Guardar</button></li>
-      <li><button class="menu-button-doc" (click)="getAllDocs()">Mis documentos</button></li>
+<div class="menu-container row">
+  <div class="menu-doc col s1">
+    <ul class="row">
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="createDoc()">Crear</button></li>
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="saveDoc()">Guardar</button></li>
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light blue-sac" (click)="getAllDocs()">Lista</button></li>
     </ul>
-   
+
   </div>
-  <editor apiKey="6o8br645ls443y35hyve8zrpx9lfo9zqpvfca8ig4cz65ac7" [init]="{
+  <div class="col s11 editor-container">
+    <editor apiKey="6o8br645ls443y35hyve8zrpx9lfo9zqpvfca8ig4cz65ac7" [init]="{
     height: 500,
     menubar: false,
     plugins: [
@@ -24,16 +21,20 @@
       alignleft aligncenter alignright alignjustify | \
       bullist numlist outdent indent | removeformat | help'
   }" (onSelectionChange)="editorContent($event)" id="text-editor"></editor>
+  </div>
   <div>
     <table *ngIf="table_state">
       <tr>
-        <th *ngFor= "let column of header_list">
+        <th class="center" *ngFor="let column of header_list">
           {{column}}
         </th>
       </tr>
       <tr *ngFor="let doc of rows; index as i">
-        <td>{{doc["_id"]}}</td>
-        <td>{{doc["document_u"]}}</td>
+        <td class="center">{{i}}</td>
+        <td class="center">{{doc["_id"]}}</td>
+        <td class="center">{{doc["document_u"]}}</td>
+        <td class="center"><button class="menu-button-editor btn waves-effect waves-light orange-sac" (click)="getDocById(doc, i)">Editar</button>
+        <td></td>
     </table>
   </div>
 </div>

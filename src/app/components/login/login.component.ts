@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { JsonManagerService } from '../../services/json-manager.service';
+import { HttpToolService } from '../../services/http-tool.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -13,16 +13,15 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private rs: JsonManagerService,
+    private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
-  url_login: string= 'http://127.0.0.1:5000/login';
+  url_login: string = 'http://127.0.0.1:5000/login';
   dataEx: JSON;
   state: string;
-  error: any;
-  login: FormGroup
+  login: FormGroup;
 
   ngOnInit(): void {
     this.login = this.fb.group({
@@ -32,29 +31,41 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.rs.postData(this.url_login, this.login.value).subscribe((data: any) => {
+    this.rs.postRequest(this.url_login, this.login.value).subscribe((data: any) => {
       this.dataEx = data;
-      localStorage.setItem("token",this.dataEx['token'])
-      this.state = this.dataEx['state'];
-      this.error = this.dataEx['error'];
+      this.state = this.dataEx['status'];
       switch (this.state) {
         case 'welcome':
-          this.router.navigate(['/home'], {relativeTo: this.route});
-          console.log('Welcome')
+          localStorage.setItem("token", this.dataEx['token']);
+          this.router.navigate(['/home'], { relativeTo: this.route });
+          console.log('Welcome');
           break;
         case 'document':
-            console.log('Incorrect Password')
+          console.log('Incorrect Password');
           break;
-        case 'password_u':
-          console.log('Incorrect Document')
+        case 'password':
+          console.log('Incorrect Document');
           break;
-        case 'error':
-          console.log('Error')
+        case 'validators':
+          console.log('Incorrect Data Form');
+          console.log(this.dataEx['error']);
+          break;
+        case 'exception':
+          console.log('Exception');
+          console.log(this.dataEx['ex']);
+          break;
+        case 'sqlalchemy get_by':
+          console.log('Sqlalchemy Exception');
+          console.log(this.dataEx['ex']);
+          break;
+        case 'postgres_tool get_by':
+          console.log('Postgresql Exception');
+          console.log(this.dataEx['ex']);
+          break;
         default:
-          console.log('Error')
+          console.log('Unknown Error');
           break;
       }
-    })
+    });
   }
-
 }

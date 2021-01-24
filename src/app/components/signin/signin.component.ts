@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { JsonManagerService } from '../../services/json-manager.service';
+import { HttpToolService } from '../../services/http-tool.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -11,7 +12,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private rs: JsonManagerService,
+    private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute,
     private spinner: SpinnerService
@@ -44,7 +45,7 @@ export class SigninComponent implements OnInit {
     if (this.signin.value['password_u'] == this.signin.value['password_c']) {
       var form = this.signin.value;
       delete form.password_c;
-      this.rs.postData(this.url_signin, form).subscribe((data: any) => {
+      this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
         this.dateEx = data;
         console.log(this.dateEx);
         this.state = this.dateEx['state'];

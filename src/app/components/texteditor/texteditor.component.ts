@@ -12,7 +12,7 @@ export class TexteditorComponent implements OnInit {
 
   myEditor: any = '';
   url_doc: string = 'http://127.0.0.1:5000/document'
-  header_list = ['_id', 'document_u'];
+  header_list = ['index', '_id', 'document_u', 'get_doc'];
   rows = [];
   table_state: boolean = false;
 
@@ -48,13 +48,14 @@ export class TexteditorComponent implements OnInit {
     };
     this.rs.postRequest(this.url_doc, data_doc).subscribe((data: any) => {
       this.insertHtml(data['format']['template']);
-      localStorage.setItem("id_acta",data['format']['id_acta']);
+      localStorage.setItem("id_acta", data['format']['id_acta']);
     });
   }
 
-  getDocById() {
-    this.rs.getRequest(this.url_doc, localStorage.getItem('id_acta')).subscribe((data: any) => {
+  getDocById(doc: any, index: number) {
+    this.rs.getRequest(this.url_doc, doc['_id']).subscribe((data: any) => {
       this.insertHtml(data['user_doc']);
+      localStorage.setItem("id_acta", doc['_id']);
     });
   }
 
