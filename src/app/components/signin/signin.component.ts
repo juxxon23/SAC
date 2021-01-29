@@ -33,6 +33,31 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  editprofile(event) {
+    if (this.signin.value['password_u'] == this.signin.value['password_c']) {
+      var form = this.signin.value;
+      delete form.password_c;
+      this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
+        this.dataEx = data;
+        console.log(this.dataEx);
+        this.state = this.dataEx['state'];
+        switch (this.state) {
+          case 'ok':
+            localStorage.setItem('document_u', this.signin.value['document_u'])
+            this.spinner.llamarSpinner();
+            this.router.navigate(['/editprofile'], { relativeTo: this.route });
+            console.log('Register Complete');
+            break;
+          case 'error':
+            console.log('Error in the form');
+            this.router.navigate(['/signin']);
+            break;
+        }
+      });
+    } else {
+      console.log('Passwords do not match');
+    }
+  }
   onSubmit() {
     if (this.signin.value['password_u'] == this.signin.value['password_c']) {
       var form = this.signin.value;
