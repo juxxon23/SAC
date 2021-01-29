@@ -13,7 +13,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptorService } from './services/interceptor.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

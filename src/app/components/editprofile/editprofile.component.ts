@@ -37,6 +37,10 @@ export class EditprofileComponent implements OnInit {
       bonding_type: [''],
       document_u: [localStorage.getItem('document_u')],
     });
+
+    var instances = M.FormSelect.init(elems, this.options);
+    console.log(localStorage.getItem('document_u'['document_u']))
+
   }
 
   onSubmit() {

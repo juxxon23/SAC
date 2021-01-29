@@ -13,7 +13,6 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rs: HttpToolService,
-
     private router: Router,
     private route: ActivatedRoute,
     private spinner: SpinnerService
