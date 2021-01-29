@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     EditprofileRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class EditprofileModule { }

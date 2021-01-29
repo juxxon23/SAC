@@ -13,6 +13,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rs: HttpToolService,
+
     private router: Router,
     private route: ActivatedRoute,
     private spinner: SpinnerService
@@ -58,7 +59,6 @@ export class SigninComponent implements OnInit {
       console.log('Passwords do not match');
     }
   }
-
   onSubmit() {
     if (this.signin.value['password_u'] == this.signin.value['password_c']) {
       var form = this.signin.value;
