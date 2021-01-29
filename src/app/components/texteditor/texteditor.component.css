@@ -1,0 +1,36 @@
+.menu-container {
+    background-color: rgb(240, 242, 245);
+}
+.menu-doc {
+    float: left;
+    width: auto;
+    height: auto;
+}
+
+.menu-button-doc {
+    width: 100%;
+    margin: 2% 0;
+}
+.menu-button-editor {
+    width: auto;
+    margin: 1%;
+}
+.center {
+    text-align: center;
+}
+.editor-container {
+    padding: 0;
+    margin: 0;
+}
+.orange-sac {
+	background-color: #fc7323;
+}
+.blue-sac {
+	background-color: #001935;
+}
+#text-editor {
+    margin: 0 1%;
+    width: auto;
+    height: auto;
+}
+

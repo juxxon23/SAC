@@ -1,0 +1,22 @@
+.blue-sac {
+	background-color: #001935;
+}
+
+.foot {
+	text-align: center;
+	color: white;
+	margin: 0;
+}
+
+p {
+	margin: 0;
+	padding: 1% 0 1% 0;
+}
+.second-foot {
+	border: 1px solid black;
+	margin: 2% 0 0 0;
+	padding: 0.5%;
+	background-color: #e3e6eb;
+}
+
+

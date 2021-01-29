@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div class="info-edit">
+        <h4 class="edit">Edita tu perfil</h4>
+        <p>Asi podremos automatizar campos cuando diligencies tus actas.</p>
+      </div>
+      <div>
+        <!-- class="second-contain" -->
+        <form
+          class="col s12 contain-edit"
+          [formGroup]="editprofile"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix blue-sac">face</i>
+              <input formControlName="name_u" type="text" class="validate" />
+              <label for="name_u">Nombres</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix blue-sac">face</i>
+              <input
+                formControlName="lastname_u"
+                type="text"
+                class="validate"
+              />
+              <label for="lastname_u">Apellidos</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix blue-sac">call</i>
+              <input formControlName="phone_u" type="tel" class="validate" />
+              <label for="phone_u">Celular/Ext. SENA</label>
+            </div>
+            <i class="material-icons left blue-sac">flag</i>
+            <div class="input-field col s5">
+              <select formControlName="regional_u">
+                <option value="" disabled selected
+                  >Seleccion su regional</option
+                >
+                <option value="Quindio">Quindio</option>
+                <option value="Antioquia">Antioquia</option>
+                <option value="Putumayo">Putumayo</option>
+              </select>
+              <label>Regional</label>
+            </div>
+          </div>
+          <div class="row">
+            <i class="material-icons left blue-sac">domain</i>
+            <div class="input-field col s5">
+              <select formControlName="center_u">
+                <option value="" disabled selected
+                  >Seleccion su centro</option
+                >
+                <option value="Centro de comercio y tu rismo">Centro de comercio</option>
+                <option value="Centro2">Centro2</option>
+                <option value="Centro3">Centro3</option>
+              </select>
+              <label>Centro</label>
+            </div>
+            <div class="col s5 vinculacion">
+              <p>Tipo de vinculación</p>
+              <p>
+                <label>
+                  <input
+                    class="with-gap"
+                    formControlName="bonding_type"
+                    name="bonding_type"
+                    value=1
+                    type="radio"
+                  />
+                  <span>Planta</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input
+                    class="with-gap"
+                    formControlName="bonding_type"
+                    name="bonding_type"
+                    value=2
+                    type="radio"
+                  />
+                  <span>Contratista</span>
+                </label>
+              </p>
+            </div>
+          </div>
+          <div class="center-align boton1">
+            <button class="waves-effect waves-light btn orange-sac" type="submit"
+              >Guardar</button
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
