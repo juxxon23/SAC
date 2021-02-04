@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       switch (this.state) {
         case 'welcome':
           localStorage.setItem("token", this.dataEx['token']);
-          this.router.navigate(['/home'], { relativeTo: this.route });
+          this.router.navigate(['/texteditor'], { relativeTo: this.route });
           console.log('Welcome');
           break;
         case 'document':

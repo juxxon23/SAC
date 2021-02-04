@@ -1,10 +1,18 @@
+.contain-body {
+	background-color:  rgb(240, 242, 245);
+}
+.row-nu {
+	margin: 0;
+	padding: 0;
+}
 .contain-signin {
-	border: 2px solid black;
-	padding: 1% 0 5% 0;
+	padding: 1% 0 2% 0;
+	background-color: #e3e6eb;
 }
 
 .center {
 	padding: 0 0 0 30%;
+	margin: 1% 0;
 
 }
 
@@ -24,21 +32,25 @@
 }
 
 .info-basic {
-	border: 1px solid black;
 	padding: 1% 2% 1% 2%;
 	background-color: #e3e6eb;
-	border-radius: 3px;
+	border-radius: 1px;
 	margin: 0 0 0.5% 0;
 }
 
 .welcome {
 	font-weight: 900;
+	margin: 0;
 }
 
 .second-contain {
 	/* Falta concluir el contenedor primario del signin basico */
 	border: 1px solid black;
 }
+
+.int-bainf {
+	margin: 1% 0 0 0;
+} 
 
 i {
 	margin: 3% 0 0 0;
@@ -52,4 +64,23 @@ h3 {
 	margin: 0;
 	padding: 0;
 	color: #FFF;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+	color: #fc7323;
+}
+/* label underline focus color */
+.input-field input:focus {
+	border-bottom: 1px solid #fc7323;
+	box-shadow: 0 1px 0 0 #fc7323;
+}
+/* label focus color */
+.input-field input:focus + label {
+	color: #fc7323;
+}
+/* valid color */
+.input-field input.valid {
+	border-bottom: 1px solid #001935;	
+	box-shadow: 0 1px 0 0 #001935;	
 }

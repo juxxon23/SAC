@@ -1,5 +1,6 @@
 .menu-container {
     background-color: rgb(240, 242, 245);
+    margin: 0;
 }
 .menu-doc {
     float: left;
@@ -9,7 +10,7 @@
 
 .menu-button-doc {
     width: 100%;
-    margin: 2% 0;
+    margin: 1% 0;
 }
 .menu-button-editor {
     width: auto;

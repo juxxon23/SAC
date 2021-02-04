@@ -1,5 +1,12 @@
+.body-cont {
+    background-color: #e3e6eb;
+}
+.row-no {
+    margin: 0;
+}
 .contain-signin {
-    padding: 1% 0 5% 0;
+    padding: 1% 0 2% 0;
+    margin: 0;
 }
 
 .center {
@@ -57,8 +64,7 @@ h3 {
 }
 
 .cajon2 {
-    display: flex;
-    padding: 0 0 0 34%;
+    text-align: center;
 }
 
 a {
@@ -68,4 +74,27 @@ a {
 
 .cajon3 {
     padding: 40px;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+	color: #fc7323;
+}
+/* label underline focus color */
+.input-field input:focus {
+	border-bottom: 1px solid #fc7323;
+	box-shadow: 0 1px 0 0 #fc7323;
+}
+/* label focus color */
+.input-field input:focus + label {
+	color: #fc7323;
+}
+/* valid color */
+.input-field input.valid {
+	border-bottom: 1px solid #001935;	
+	box-shadow: 0 1px 0 0 #001935;	
+}
+
+.blue-sac {
+	color: #001935;	
 }

@@ -59,6 +59,7 @@ export class SigninComponent implements OnInit {
     }
   }
   onSubmit() {
+    console.log(this.signin.value)
     if (this.signin.value['password_u'] == this.signin.value['password_c']) {
       var form = this.signin.value;
       delete form.password_c;
@@ -78,6 +79,7 @@ export class SigninComponent implements OnInit {
             break;
         }
       });
+      form.password_c = ''
     } else {
       console.log('Passwords do not match');
     }

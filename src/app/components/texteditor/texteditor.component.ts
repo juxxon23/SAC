@@ -33,14 +33,6 @@ export class TexteditorComponent implements OnInit {
     let data_doc = {
       'document_u': '1094972662',
       'format_id': 1,
-      'competencies_list': [
-        1,
-        2
-      ],
-      'results_list': [
-        1,
-        2
-      ],
       'opts': [
         1,
         2

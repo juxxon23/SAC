@@ -1,50 +1,35 @@
-<div class="container">
-  <div class="row">
-    <div class="container">
-      <form class="col s12 contain-login" [formGroup]="login" (ngSubmit)="onSubmit()">
-        <div class="icon-account">
-          <img
-            src="../../../assets/account_icon_light.png"
-            alt="account icon"
-          />
-          <h3>INGRESAR</h3>
-        </div>
-        <div class="row center">
-          <div class="input-field col s6">
-            <i class="material-icons prefix blue-sac">assignment</i>
-            <input
-              formControlName="document_u"
-              type="text"
-              class="validate"
-              required
-            />
-            <label for="document_u">Documento</label>
+<div class="body-contain">
+  <div class="container">
+    <div class="row con-row">
+      <div class="container">
+        <form class="col s12 contain-login" [formGroup]="login" (ngSubmit)="onSubmit()">
+          <div class="icon-account">
+            <img src="../../../assets/account_icon_light.png" alt="account icon" />
+            <h3>INGRESAR</h3>
           </div>
-        </div>
-        <div class="row center">
-          <div class="input-field col s6">
-            <i class="material-icons prefix blue-sac">lock</i>
-            <input
-              formControlName="password_u"
-              type="password"
-              class="validate"
-              required
-            />
-            <label for="password_u">Contraseña</label>
+          <div class="row center">
+            <div class="input-field col s6">
+              <i class="material-icons prefix blue-sac">assignment</i>
+              <input formControlName="document_u" type="text" class="validate" required />
+              <label for="document_u">Documento</label>
+            </div>
           </div>
-        </div>
-        <div class="center-align">
-          <button
-              class="waves-effect waves-light btn gray-sac"
-              type="submit"
-              [disabled]="login.invalid"
-            >
+          <div class="row center">
+            <div class="input-field col s6">
+              <i class="material-icons prefix blue-sac">lock</i>
+              <input formControlName="password_u" type="password" class="validate" required />
+              <label for="password_u">Contraseña</label>
+            </div>
+          </div>
+          <div class="center-align">
+            <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="login.invalid">
               Iniciar Sesion
             </button>
-          <br />
-          <a routerLink="/signin">¿No está registrado?</a>
-        </div>
-      </form>
+            <br />
+            <a routerLink="/signin">¿No está registrado?</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
