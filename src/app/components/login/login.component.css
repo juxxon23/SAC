@@ -23,7 +23,10 @@
 	padding: 0 0 0 30%;
 
 }
-
+.pas {
+	margin: 0 0 1% 0;
+	padding: 0 0 0 33%;
+}
 .blue-sac {
 	color: #001935;	
 }
@@ -34,6 +37,14 @@
 
 .con-row {
 	margin: 0;
+}
+.sp {
+	width: 100px;
+}
+.cont-sp {
+	text-align: center;
+	margin: 0;
+	padding: 0;
 }
 
 i {

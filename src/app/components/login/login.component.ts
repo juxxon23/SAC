@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   dataEx: JSON;
   state: string;
   login: FormGroup;
+  stateSp: boolean = false;
 
   ngOnInit(): void {
     this.login = this.fb.group({
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.stateSp = true;
     this.rs.postRequest(this.url_login, this.login.value).subscribe((data: any) => {
       this.dataEx = data;
       this.state = this.dataEx['status'];
@@ -68,4 +70,5 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
 }
