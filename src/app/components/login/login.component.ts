@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  //url_login: string = 'https://floating-falls-31326.herokuapp.com/login';
   url_login: string = 'http://127.0.0.1:5000/login';
   dataEx: JSON;
   state: string;

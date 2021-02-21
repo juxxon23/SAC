@@ -11,7 +11,8 @@ declare var tinymce: any;
 export class TexteditorComponent implements OnInit {
 
   myEditor: any = '';
-  url_doc: string = 'http://127.0.0.1:5000/document'
+  //url_doc: string = 'https://floating-falls-31326.herokuapp.com/document'
+  url_doc: string = 'http://127.0.0.1:5000/document';
   header_list = ['index', '_id', 'document_u', 'get_doc'];
   rows = [];
   table_state: boolean = false;
@@ -31,7 +32,7 @@ export class TexteditorComponent implements OnInit {
 
   createDoc() {
     let data_doc = {
-      'document_u': '1094972662',
+      'document_u': '1094999999',
       'format_id': 1,
       'opts': [
         1,

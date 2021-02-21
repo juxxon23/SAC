@@ -18,6 +18,7 @@ export class SigninComponent implements OnInit {
     private spinner: SpinnerService
   ) {}
 
+  //url_signin: string = 'https://floating-falls-31326.herokuapp.com/signin';
   url_signin: string = 'http://127.0.0.1:5000/signin';
   dataEx: JSON;
   state: string;

@@ -18,6 +18,7 @@ export class EditprofileComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  //url_editprofile: string = 'https://floating-falls-31326.herokuapp.com/signin';
   url_editprofile: string = 'http://127.0.0.1:5000/signin';
   dataEx: JSON;
   state: string;
