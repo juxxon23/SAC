@@ -37,12 +37,29 @@
               </div>
             </div>
             <div class="center-align">
-              <button class="waves-effect waves-light btn gray-sac" type="submit" [disabled]="signin.invalid">
+              <button class="waves-effect waves-light btn gray-sac" type="submit" [disabled]="signin.invalid"
+                *ngIf="!stateSp">
                 Finalizar
               </button>
-              <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="signin.invalid"
-                (click)="editprofile($event)">
-                Editar Perfil
+              <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="signin.invalid" (click)="editProfile()">
+                <div *ngIf="!stateSp">
+                  Editar Perfil
+                </div>
+                <div class="cont-sp">
+                  <div class="preloader-wrapper small active" *ngIf="stateSp">
+                    <div class="spinner-layer" [ngStyle]="{'border-color':'#001935'}">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="gap-patch">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </button>
             </div>
           </form>

@@ -16,7 +16,7 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private spinner: SpinnerService
-  ) {}
+  ) { }
 
   //url_signin: string = 'https://floating-falls-31326.herokuapp.com/signin';
   url_signin: string = 'http://127.0.0.1:5000/signin';
@@ -24,6 +24,8 @@ export class SigninComponent implements OnInit {
   state: string;
   error: any;
   signin: FormGroup;
+  stateSp: boolean = false;
+  editProf: boolean = false;
 
   ngOnInit(): void {
     this.signin = this.fb.group({
@@ -34,55 +36,54 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  editprofile(event) {
-    if (this.signin.value['password_u'] == this.signin.value['password_c']) {
-      var form = this.signin.value;
-      delete form.password_c;
-      this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
-        this.dataEx = data;
-        console.log(this.dataEx);
-        this.state = this.dataEx['state'];
-        switch (this.state) {
-          case 'ok':
-            localStorage.setItem('document_u', this.signin.value['document_u'])
-            this.spinner.llamarSpinner();
-            this.router.navigate(['/editprofile'], { relativeTo: this.route });
-            console.log('Register Complete');
-            break;
-          case 'error':
-            console.log('Error in the form');
-            this.router.navigate(['/signin']);
-            break;
-        }
-      });
-    } else {
-      console.log('Passwords do not match');
-    }
+  editProfile() {
+    this.editProf = true;
   }
   onSubmit() {
-    console.log(this.signin.value)
-    if (this.signin.value['password_u'] == this.signin.value['password_c']) {
-      var form = this.signin.value;
-      delete form.password_c;
-      this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
-        this.dataEx = data;
-        console.log(this.dataEx);
-        this.state = this.dataEx['state'];
-        switch (this.state) {
-          case 'ok':
-            this.spinner.llamarSpinner();
-            this.router.navigate(['/login'], { relativeTo: this.route });
-            console.log('Register Complete');
-            break;
-          case 'error':
-            console.log('Error in the form');
-            this.router.navigate(['/signin']);
-            break;
+    if (this.signin.valid) {
+      this.stateSp = true;
+      if (this.signin.value['password_u'] == this.signin.value['password_c']) {
+        var form = this.signin.value;
+        delete form.password_c;
+        if (this.editProf) {
+          this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
+            this.dataEx = data;
+            this.state = this.dataEx['state'];
+            switch (this.state) {
+              case 'ok':
+                localStorage.setItem('document_u', this.signin.value['document_u'])
+                this.router.navigate(['/editprofile'], { relativeTo: this.route });
+                console.log('Register Complete');
+                break;
+              case 'error':
+                console.log('Error in the form');
+                this.router.navigate(['/signin']);
+                break;
+            }
+          });
+          form.password_c = ''
+        } else {
+          this.rs.postRequest(this.url_signin, form).subscribe((data: any) => {
+            this.dataEx = data;
+            this.state = this.dataEx['state'];
+            switch (this.state) {
+              case 'ok':
+                this.router.navigate(['/login'], { relativeTo: this.route });
+                console.log('Register Complete');
+                break;
+              case 'error':
+                console.log('Error in the form');
+                this.router.navigate(['/signin']);
+                break;
+            }
+          });
+          form.password_c = ''
         }
-      });
-      form.password_c = ''
+      } else {
+        console.log('Passwords do not match');
+      }
     } else {
-      console.log('Passwords do not match');
+      console.log('Form Error');
     }
   }
 }
