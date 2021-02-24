@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,9 @@ import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public auth: AuthService
+  ) { }
 
   options = {}
 

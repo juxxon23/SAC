@@ -1,4 +1,4 @@
-<div class="menu-container row">
+<div class="menu-container row" *ngIf="auth.isLoggedIn() | async">
   <div class="menu-doc col s1">
     <ul class="row">
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="createDoc()">Crear</button></li>
@@ -7,7 +7,7 @@
     </ul>
 
   </div>
-  <div class="col s11 editor-container">
+  <div class="col s11 editor-container" *ngIf="auth.isLoggedIn() | async">
     <editor apiKey="6o8br645ls443y35hyve8zrpx9lfo9zqpvfca8ig4cz65ac7" [init]="{
     height: 500,
     menubar: false,

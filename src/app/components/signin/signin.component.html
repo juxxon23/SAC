@@ -7,7 +7,7 @@
           <p class="int-bainf">Por favor ingrese sus datos básicos.</p>
         </div>
         <div>
-          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()">
+          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()" *ngIf="!(auth.isLoggedIn() | async)">
             <div class="row center">
               <div class="input-field col s6">
                 <i class="material-icons prefix blue-sac">assignment</i>

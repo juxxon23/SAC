@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpToolService } from '../../services/http-tool.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SpinnerService } from 'src/app/services/spinner.service';
+
+import { HttpToolService } from '../../services/http-tool.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private rs: HttpToolService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private rs: HttpToolService,
+    public auth: AuthService,
   ) { }
 
   //url_login: string = 'https://floating-falls-31326.herokuapp.com/login';
@@ -41,7 +43,8 @@ export class LoginComponent implements OnInit {
       this.rs.postRequest(this.url_login, this.login.value).subscribe(
         (data: any) => {
           if (data['status'] == 'welcome') {
-            localStorage.setItem("token", data['token']);
+            this.auth.login(data['tkse']);
+            this.auth.setCurrentUser(data['username']);
             this.router.navigate(['/texteditor'], { relativeTo: this.route });
           }
         }, (error) => {

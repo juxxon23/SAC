@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpToolService } from '../../services/http-tool.service';
+import { AuthService } from '../../services/auth.service';
 
 declare var tinymce: any;
 
@@ -17,7 +18,10 @@ export class TexteditorComponent implements OnInit {
   rows = [];
   table_state: boolean = false;
 
-  constructor(private rs: HttpToolService) { }
+  constructor(
+    private rs: HttpToolService,
+    public auth: AuthService
+    ) { }
 
   ngOnInit(): void {
   }

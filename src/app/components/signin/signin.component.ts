@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpToolService } from '../../services/http-tool.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SpinnerService } from 'src/app/services/spinner.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +15,7 @@ export class SigninComponent implements OnInit {
     private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: SpinnerService
+    public auth: AuthService
   ) { }
 
   //url_signin: string = 'https://floating-falls-31326.herokuapp.com/signin';

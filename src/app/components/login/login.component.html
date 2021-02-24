@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row con-row">
       <div class="container">
-        <form class="col s12 contain-login" [formGroup]="login" (ngSubmit)="onSubmit()">
+        <form class="col s12 contain-login" [formGroup]="login" (ngSubmit)="onSubmit()" *ngIf="!(auth.isLoggedIn() | async)">
           <div class="icon-account">
             <img src="../../../static/account_icon_light.png" alt="account icon" />
             <h3>INGRESAR</h3>
