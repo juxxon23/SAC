@@ -21,24 +21,26 @@
               <label for="password_u">Contraseña</label>
             </div>
           </div>
-          <div class="cont-sp">
-            <div class="preloader-wrapper small active" *ngIf="stateSp">
-              <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="center-align">
             <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="login.invalid">
-              Iniciar Sesion
+              <div *ngIf="!stateSp">
+                Iniciar Sesion
+              </div>
+              <div class="cont-sp">
+                <div class="preloader-wrapper small active" *ngIf="stateSp">
+                  <div class="spinner-layer" [ngStyle]= "{'border-color':'#001935'}">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </button>
             <br />
             <a routerLink="/signin">¿No está registrado?</a>

@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   //url_login: string = 'https://floating-falls-31326.herokuapp.com/login';
   url_login: string = 'http://127.0.0.1:5000/login';
-  dataEx: JSON;
   state: string;
   login: FormGroup;
   stateSp: boolean = false;
@@ -32,44 +31,52 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-    this.stateSp = true;
-    this.rs.postRequest(this.url_login, this.login.value).subscribe((data: any) => {
-      this.dataEx = data;
-      this.state = this.dataEx['status'];
-      switch (this.state) {
-        case 'welcome':
-          localStorage.setItem("token", this.dataEx['token']);
-          this.router.navigate(['/texteditor'], { relativeTo: this.route });
-          console.log('Welcome');
-          break;
-        case 'document':
-          console.log('Incorrect Password');
-          break;
-        case 'password':
-          console.log('Incorrect Document');
-          break;
-        case 'validators':
-          console.log('Incorrect Data Form');
-          console.log(this.dataEx['error']);
-          break;
-        case 'exception':
-          console.log('Exception');
-          console.log(this.dataEx['ex']);
-          break;
-        case 'sqlalchemy get_by':
-          console.log('Sqlalchemy Exception');
-          console.log(this.dataEx['ex']);
-          break;
-        case 'postgres_tool get_by':
-          console.log('Postgresql Exception');
-          console.log(this.dataEx['ex']);
-          break;
-        default:
-          console.log('Unknown Error');
-          break;
-      }
-    });
+  changeState(data: boolean) {
+    return !data;
   }
 
+  onSubmit() {
+    if (this.login.valid) {
+      this.changeState(this.stateSp);
+      this.rs.postRequest(this.url_login, this.login.value).subscribe(
+        (data: any) => {
+          if (data['status'] == 'welcome') {
+            localStorage.setItem("token", data['token']);
+            this.router.navigate(['/texteditor'], { relativeTo: this.route });
+          }
+        }, (error) => {
+          let server_error = error.error
+          switch (server_error['status']) {
+            case 'document':
+              alert('Incorrect Document');
+              break;
+            case 'password':
+              alert('Incorrect Password');
+              break;
+            case 'validators':
+              alert('Incorrect Data Form');
+              console.log(server_error['error']);
+              break;
+            case 'exception':
+              alert('Exception');
+              console.log(server_error['ex']);
+              break;
+            case 'sqlalchemy get_by':
+              alert('Sqlalchemy Exception');
+              console.log(server_error['ex']);
+              break;
+            case 'postgres_tool get_by':
+              alert('Postgresql Exception');
+              console.log(server_error['ex']);
+              break;
+            default:
+              alert('Unknown Error');
+              break;
+          }
+          this.changeState(this.stateSp);
+        });
+    } else {
+      alert('Form Error');
+    }
+  }
 }
