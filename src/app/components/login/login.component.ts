@@ -33,13 +33,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  changeState(data: boolean) {
-    return !data;
-  }
-
   onSubmit() {
     if (this.login.valid) {
-      this.changeState(this.stateSp);
+      this.stateSp = !this.stateSp;
       this.rs.postRequest(this.url_login, this.login.value).subscribe(
         (data: any) => {
           if (data['status'] == 'welcome') {
@@ -48,35 +44,35 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/texteditor'], { relativeTo: this.route });
           }
         }, (error) => {
-          let server_error = error.error
-          switch (server_error['status']) {
-            case 'document':
-              alert('Incorrect Document');
+          this.stateSp = !this.stateSp;
+          let srv_error = error.error;
+          switch (srv_error['status']) {
+            case 'user':
+              alert('The user doesn\'t exists');
               break;
             case 'password':
               alert('Incorrect Password');
               break;
             case 'validators':
               alert('Incorrect Data Form');
-              console.log(server_error['error']);
+              console.log(srv_error['error']);
               break;
             case 'exception':
               alert('Exception');
-              console.log(server_error['ex']);
+              console.log(srv_error['ex']);
               break;
             case 'sqlalchemy get_by':
               alert('Sqlalchemy Exception');
-              console.log(server_error['ex']);
+              console.log(srv_error['ex']);
               break;
             case 'postgres_tool get_by':
               alert('Postgresql Exception');
-              console.log(server_error['ex']);
+              console.log(srv_error['ex']);
               break;
             default:
               alert('Unknown Error');
               break;
           }
-          this.changeState(this.stateSp);
         });
     } else {
       alert('Form Error');
