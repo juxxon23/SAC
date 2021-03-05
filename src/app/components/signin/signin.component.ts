@@ -50,9 +50,8 @@ export class SigninComponent implements OnInit {
             (data: any) => {
               if (data['status'] == 'ok') {
                 // Falta ajustar lo que se guarda en el localstorage
-                localStorage.setItem('document_u', this.signin.value['document_u'])
+                localStorage.setItem('doc_u', this.signin.value['document_u'])
                 this.router.navigate(['/editprofile'], { relativeTo: this.route });
-                alert('Register Complete');
               }
             }, (error) => {
               this.stateSp = !this.stateSp;
