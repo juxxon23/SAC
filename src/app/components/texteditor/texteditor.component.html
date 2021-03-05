@@ -1,4 +1,4 @@
-<div class="menu-container row" *ngIf="auth.isLoggedIn() | async">
+<div class="menu-container row" *ngIf="auth.isLoggedIn() | async">{{auth.getCourrentUser()}}
   <div class="menu-doc col s1">
     <ul class="row">
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="createDoc()">Crear</button></li>
