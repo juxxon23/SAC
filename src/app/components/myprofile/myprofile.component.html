@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="contain-myprofile gray-sac">
+    <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">{{auth.getCourrentUser()}}
       <!-- class="second-contain" -->
       <h2 class="center">Datos personales</h2>
       <div class="row">

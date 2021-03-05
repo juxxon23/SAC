@@ -1,7 +1,7 @@
 <div class="body-cont">
     <div class="container">
         <div class="row row-no">
-            <div class="contain-signin" *ngIf="auth.isLoggedIn() | async">
+            <div class="contain-signin" *ngIf="auth.isLoggedIn() | async">{{auth.getCourrentUser()}}
                 <!-- class="second-contain" -->
                 <div class="col s12 buscador">
                     <div class="row">
