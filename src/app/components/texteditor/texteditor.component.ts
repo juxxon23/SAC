@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpToolService } from '../../services/http-tool.service';
 import { AuthService } from '../../services/auth.service';
+import { DocumentToolService } from '../../services/document-tool.service';
 
 declare var tinymce: any;
 
@@ -20,7 +21,8 @@ export class TexteditorComponent implements OnInit {
 
   constructor(
     private rs: HttpToolService,
-    public auth: AuthService
+    public auth: AuthService,
+    public dt: DocumentToolService
     ) { }
 
   ngOnInit(): void {
@@ -51,8 +53,9 @@ export class TexteditorComponent implements OnInit {
 
   getDocById(doc: any, index: number) {
     this.rs.getRequest(this.url_doc, doc['_id']).subscribe((data: any) => {
-      this.insertHtml(data['user_doc']);
       localStorage.setItem("id_acta", doc['_id']);
+      this.insertHtml(data['template']);
+      this.dt.updateContent(data['us']['content']);
     });
   }
 
