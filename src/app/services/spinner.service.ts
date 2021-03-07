@@ -5,13 +5,15 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root',
 })
 export class SpinnerService {
-  constructor(private spinnerService: NgxSpinnerService) {}
+  constructor(
+    private spinner: NgxSpinnerService
+  ) {}
 
   public llamarSpinner() {
-    this.spinnerService.show();
+    return this.spinner.show();
   }
 
   public detenerSpinner() {
-    this.spinnerService.hide();
+    return this.spinner.hide();
   }
 }

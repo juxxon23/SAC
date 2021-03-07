@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   url_login: string = 'http://127.0.0.1:5000/login';
   state: string;
   login: FormGroup;
-  stateSp: boolean = false;
 
   ngOnInit(): void {
     this.login = this.fb.group({
@@ -35,16 +34,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.login.valid) {
-      this.stateSp = !this.stateSp;
       this.rs.postRequest(this.url_login, this.login.value).subscribe(
         (data: any) => {
           if (data['status'] == 'welcome') {
             this.auth.login(data['tkse']);
             this.auth.setCurrentUser(data['username']);
-            this.router.navigate(['/texteditor'], { relativeTo: this.route });
+            this.router.navigate(['/home'], { relativeTo: this.route });
           }
         }, (error) => {
-          this.stateSp = !this.stateSp;
           let srv_error = error.error;
           switch (srv_error['status']) {
             case 'user':
