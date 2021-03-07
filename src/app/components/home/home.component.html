@@ -12,10 +12,27 @@
                     </div>
                 </div>
                 <div class="cajon2 ">
-                    <a class="waves-effect waves-light btn orange-sac">Buscar</a>
+                    <button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="findActs()">Buscar</button>
+                    <button class="menu-button-doc btn waves-effect waves-light orange-sac">Crear Acta</button>
                 </div>
-                <div class="cajon3 ">
-                </div>
+            </div>
+            <div class="cajon3">
+                <table *ngIf="table_state">
+                    <tr>
+                        <th class="center-r" *ngFor="let column of header_list">
+                            {{column}}
+                        </th>
+                    </tr>
+                    <tr *ngFor="let doc of rows; index as i">
+                        <td class="center-r">{{i}}</td>
+                        <td class="center-r">{{doc["_id"]}}</td>
+                        <td class="center-r">{{doc["document_u"]}}</td>
+                        <td class="center-r">contenido</td>
+                        <td class="center-r"><button
+                                class="menu-button-editor btn waves-effect waves-light orange-sac"
+                                (click)="actBy(doc)">Editar</button>
+                        <td></td>
+                </table>
             </div>
         </div>
     </div>

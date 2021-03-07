@@ -43,7 +43,6 @@ export class EditprofileComponent implements OnInit {
 
   onSubmit() {
     var form = this.editprofile.value;
-    console.log(form);
     this.rs.putRequest(this.url_editprofile, form).subscribe((data: any) => {
       this.dataEx = data;
       console.log(this.dataEx);

@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { TinyMCE } from 'tinymce';
+import { AuthService } from '../services/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentToolService {
 
-  constructor() { }
+  constructor(
+    public auth: AuthService
+  ) { }
 
   newAssistant: string = '<tr class="instru"><td class="num-asis" style="text-align: center;"></td><td colspan="2"><span class="full-name" style="text-indent: 0.34em;"></span></td><td><span class="id-instru" style="margin-left: 0.58em;"></span></td><td class="bonding-type" style="text-align: center;"></td><td class="bonding-type" style="text-align: center;"></td><td class="company-depen" colspan="2"></td><td colspan="2"><span class="mail-instru" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext" style="text-indent: 0.01em;"></span></td><td><br></td></tr>';
+  act: any;
+  rows: any;
   currContent: any;
   framDoc: any;
   headerKeys: any = [
@@ -130,5 +135,13 @@ export class DocumentToolService {
         e[i].innerHTML = content;
       }
     }
+  }
+
+  getAct(doc: any): any {
+    this.act = {
+      't': doc['template'],
+      'c': doc['u']
+    }
+    return this.act;
   }
 }

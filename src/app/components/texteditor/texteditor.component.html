@@ -1,9 +1,10 @@
 <div class="menu-container row">
   <div class="menu-doc col s1">
     <ul class="row">
-      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="createDoc()">Crear</button></li>
-      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="saveDoc()">Guardar</button></li>
-      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light blue-sac" (click)="getAllDocs()">Lista</button></li>
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
+          (click)="createDoc()">Crear</button></li>
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
+          (click)="saveDoc()">Guardar</button></li>
     </ul>
 
   </div>
@@ -21,20 +22,21 @@
       alignleft aligncenter alignright alignjustify | \
       bullist numlist outdent indent | removeformat | help'
   }" (onSelectionChange)="editorContent($event)" id="text-editor"></editor>
-  
-  <div>
-    <table *ngIf="table_state">
-      <tr>
-        <th class="center" *ngFor="let column of header_list">
-          {{column}}
-        </th>
-      </tr>
-      <tr *ngFor="let doc of rows; index as i">
-        <td class="center">{{i}}</td>
-        <td class="center">{{doc["_id"]}}</td>
-        <td class="center">{{doc["document_u"]}}</td>
-        <td class="center"><button class="menu-button-editor btn waves-effect waves-light orange-sac" (click)="getDocById(doc, i)">Editar</button>
-        <td></td>
-    </table>
+
+    <div>
+      <table *ngIf="table_state">
+        <tr>
+          <th class="center" *ngFor="let column of header_list">
+            {{column}}
+          </th>
+        </tr>
+        <tr *ngFor="let doc of rows; index as i">
+          <td class="center">{{i}}</td>
+          <td class="center">{{doc["_id"]}}</td>
+          <td class="center">{{doc["document_u"]}}</td>
+          <td class="center"><button class="menu-button-editor btn waves-effect waves-light orange-sac"
+              (click)="getDocById(doc)">Editar</button>
+          <td></td>
+      </table>
+    </div>
   </div>
-</div>

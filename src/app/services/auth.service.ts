@@ -10,9 +10,22 @@ export class AuthService {
 
   isLogin = new BehaviorSubject<boolean>(this.checkToken());
   user = new BehaviorSubject<boolean>(null);
+  act = new BehaviorSubject<boolean>(null);
 
   private checkToken(): boolean {
     return !!localStorage.getItem('tkse');
+  }
+
+  setCurrentAct(act: string): void {
+    localStorage.setItem('currentAct', act);
+  }
+
+  getCurrentAct(): string {
+    return localStorage.getItem('currentAct')
+  }
+
+  private deleteCurrentAct(): void {
+    localStorage.removeItem('currentAct');
   }
 
   login(token: string): void {
@@ -35,6 +48,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('tks');
+    this.deleteCurrentAct();
     this.deleteCurrentUser();
     this.isLogin.next(false);
   }
@@ -45,5 +59,9 @@ export class AuthService {
 
   isUser(): Observable<boolean> {
     return this.user.asObservable();
+  }
+
+  isAct(): Observable<boolean> {
+    return this.act.asObservable();
   }
 }
