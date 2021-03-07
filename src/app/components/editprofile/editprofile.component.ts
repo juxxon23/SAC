@@ -33,22 +33,23 @@ export class EditprofileComponent implements OnInit {
       name_u: [''],
       lastname_u: [''],
       phone_u: [''],
+      city_u: [''],
       regional_u: [''],
       center_u: [''],
       bonding_type: [''],
-      document_u: [localStorage.getItem('document_u')],
+      doc_u: [localStorage.getItem('doc_u')],
     });
   }
 
   onSubmit() {
     var form = this.editprofile.value;
-    console.log(form);
     this.rs.putRequest(this.url_editprofile, form).subscribe((data: any) => {
       this.dataEx = data;
       console.log(this.dataEx);
-      this.state = this.dataEx['state'];
+      this.state = this.dataEx['status'];
       switch (this.state) {
         case 'ok':
+          localStorage.removeItem('doc_u')
           this.router.navigate(['/home'], { relativeTo: this.route });
           break;
         case 'error':

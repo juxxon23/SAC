@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpToolService } from '../../services/http-tool.service';
 import { AuthService } from '../../services/auth.service';
+import { DocumentToolService } from '../../services/document-tool.service';
 
 declare var tinymce: any;
 
@@ -20,10 +21,26 @@ export class TexteditorComponent implements OnInit {
 
   constructor(
     private rs: HttpToolService,
-    public auth: AuthService
-    ) { }
+    public auth: AuthService,
+    private dt: DocumentToolService
+  ) {}
 
   ngOnInit(): void {
+    this.verifyEdit();
+  }
+
+
+  verifyEdit() {
+    try {
+      let t: any = tinymce.activeEditor.initialized;
+      if (t) {
+        this.getDocById(this.auth.getCurrentAct());
+      }
+    } catch (err) {
+      setTimeout(() => {
+        this.verifyEdit()
+      }, 1000)
+    }
   }
 
   editorContent(tinyEditor) {
@@ -36,40 +53,33 @@ export class TexteditorComponent implements OnInit {
 
   createDoc() {
     let data_doc = {
-      'document_u': '1094999999',
+      'document_u': this.auth.getCurrentUser(),
       'format_id': 1,
-      'opts': [
-        1,
-        2
-      ]
     };
     this.rs.postRequest(this.url_doc, data_doc).subscribe((data: any) => {
       this.insertHtml(data['format']['template']);
-      localStorage.setItem("id_acta", data['format']['id_acta']);
+      this.auth.setCurrentAct(data['format']['id_acta']);
     });
   }
 
-  getDocById(doc: any, index: number) {
-    this.rs.getRequest(this.url_doc, doc['_id']).subscribe((data: any) => {
-      this.insertHtml(data['user_doc']);
-      localStorage.setItem("id_acta", doc['_id']);
-    });
-  }
-
-  getAllDocs() {
-    this.rs.getRequest(this.url_doc).subscribe((data: any) => {
-      this.rows = data['docs'];
-      this.table_state = true;
-    });
+  getDocById(act: any) {
+    this.rs.getRequest(this.url_doc, act).subscribe(
+      (data: any) => {
+        let content = this.dt.getAct(data);
+        this.insertHtml(content['t']);
+        if (content['c']) {
+          this.dt.updateContent(content['c']);
+        } 
+      });
   }
 
   saveDoc() {
     let content = this.myEditor['editor']['contentDocument']['documentElement']['innerHTML'];
-    let id_acta = localStorage.getItem('id_acta');
-    //let doc_u = localStorage.getItem('doc_u');
+    let id_acta = this.auth.getCurrentAct();
+    let doc_u = this.auth.getCurrentUser();
     let data_doc = {
       'id_acta': id_acta,
-      'document_u': '1094972662', //doc_u
+      'document_u': doc_u,
       'content': content
     }
     this.rs.putRequest(this.url_doc, data_doc).subscribe((data: any) => {

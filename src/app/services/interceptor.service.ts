@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor( private spinnerService: SpinnerService) { }
+  constructor(private spinnerService: SpinnerService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.llamarSpinner();

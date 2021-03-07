@@ -24,7 +24,6 @@ export class SigninComponent implements OnInit {
   state: string;
   error: any;
   signin: FormGroup;
-  stateSp: boolean = false;
   editProf: boolean = false;
 
   ngOnInit(): void {
@@ -41,7 +40,6 @@ export class SigninComponent implements OnInit {
   }
   onSubmit() {
     if (this.signin.valid) {
-      this.stateSp = !this.stateSp;
       if (this.signin.value['password_u'] == this.signin.value['password_c']) {
         var form = this.signin.value;
         delete form.password_c;
@@ -50,12 +48,10 @@ export class SigninComponent implements OnInit {
             (data: any) => {
               if (data['status'] == 'ok') {
                 // Falta ajustar lo que se guarda en el localstorage
-                localStorage.setItem('document_u', this.signin.value['document_u'])
+                localStorage.setItem('doc_u', this.signin.value['document_u'])
                 this.router.navigate(['/editprofile'], { relativeTo: this.route });
-                alert('Register Complete');
               }
             }, (error) => {
-              this.stateSp = !this.stateSp;
               let srv_error = error.error;
               switch (srv_error['status']) {
                 case 'validators':
@@ -89,7 +85,6 @@ export class SigninComponent implements OnInit {
                 alert('Register Complete');
               }
             }, (error) => {
-              this.stateSp = !this.stateSp;
               let srv_error = error.error;
               switch (srv_error['status']) {
                 case 'user':
@@ -120,11 +115,9 @@ export class SigninComponent implements OnInit {
           form.password_c = ''
         }
       } else {
-        this.stateSp = !this.stateSp;
         console.log('Passwords do not match');
       }
     } else {
-      this.stateSp = !this.stateSp;
       console.log('Form Error');
     }
   }
