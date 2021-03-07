@@ -1,13 +1,13 @@
 <div class="contain-body">
   <div class="container">
     <div class="row row-nu">
-      <div class="container">
+      <div class="container" *ngIf="!(auth.isLoggedIn() | async)">
         <div class="info-basic">
           <h4 class="welcome">Bienvenido</h4>
           <p class="int-bainf">Por favor ingrese sus datos básicos.</p>
         </div>
         <div>
-          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()" *ngIf="!(auth.isLoggedIn() | async)">
+          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()" >
             <div class="row center">
               <div class="input-field col s6">
                 <i class="material-icons prefix blue-sac">assignment</i>
