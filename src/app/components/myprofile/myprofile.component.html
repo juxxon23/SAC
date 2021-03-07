@@ -1,84 +1,95 @@
 <div class="container">
   <div class="row">
-    <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">{{auth.getCourrentUser()}}
+    <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">
       <!-- class="second-contain" -->
-      <h2 class="center">Datos personales</h2>
-      <div class="row">
-        <div class="col s4">
-          <h6>Nombres<i class="material-icons">create</i></h6>
-          <label for="nombre">Nombres</label>
-          <h6>Documento<i class="material-icons">create</i></h6>
-          <label for="Documento">Documento</label>
-          <h6>Celular/Ext.SENA<i class="material-icons">create</i></h6>
-          <label for="celular">Celular/Ext.SENA</label>
-          <h6>Centro<i class="material-icons">create</i></h6>
-          <label for="centro">Centro</label>
-          <div class="left-align boton">
-            <a
-              class="waves-effect waves-light btn gray-sac subBtn"
-              routerLink="/home"
-              >Cambiar Contraseña</a
-            >
+      <h2 class="center">Datos personales<button type="submit" (click)="onButtonClick()" >
+        <i class="material-icons">create</i>
+      </button></h2>
+      <form [formGroup]="myprofile" >
+        <div class="row center">
+          <div class="col s4">
+            <h6>
+              Nombres<button type="submit">
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" formControlName="name_u"  [disabled]="click"/>
+            <h6>
+              Celular/Ext.SENA<button id="phone">
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" [disabled]="click" />
+            <h6>
+              Centro<button id="center">
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" formControlName="center_u" />
+            <div class="left-align boton">
+              <a
+                class="waves-effect waves-light btn gray-sac subBtn"
+                routerLink="/home"
+                >Cambiar Contraseña</a
+              >
+            </div>
+          </div>
+          <div class="col s4">
+            <h6>
+              Apellidos<button id="lastname">
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" formControlName="lastname_u" />
+            <h6>
+              Regional<button id="regional">
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" formControlName="regional_u" />
+            <h6>
+              Tipo<button><i class="material-icons">create</i></button>
+            </h6>
+            <input type="text" formControlName="bonding_type" />
+          </div>
+          <div class="col s4">
+            <h6>
+              Ciudad de residencia<button>
+                <i class="material-icons">create</i>
+              </button>
+            </h6>
+            <input type="text" formControlName="city_u" />
           </div>
         </div>
-        <div class="col s4">
-          <h6>Apellidos<i class="material-icons">create</i></h6>
-          <label for="nombre">Apellidos</label>
-          <h6>Correo Institucional<i class="material-icons">create</i></h6>
-          <label for="correoInstitucional">Correo Institucional</label>
-          <h6>Regional<i class="material-icons">create</i></h6>
-          <label for="regional">Regional</label>
-          <h6>Tipo<i class="material-icons">create</i></h6>
-          <label for="tipo">Tipo</label>
+        <div class="center-align boton2">
+          <button
+            class="waves-effect waves-light btn orange-sac"
+            type="submit"
+            *ngIf="!stateSp"
+          >
+            Guardar
+            <div *ngIf="!stateSp">Editar Perfil</div>
+            <div class="cont-sp">
+              <div class="preloader-wrapper small active" *ngIf="stateSp">
+                <div
+                  class="spinner-layer"
+                  [ngStyle]="{ 'border-color': '#001935' }"
+                >
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
         </div>
-        <div class="col s4">
-          <table class="centered tabla1">
-            <thead>
-              <tr>
-                <th>Competencias <i class="material-icons">create</i></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Competencia 1</td>
-              </tr>
-              <tr>
-                <td>Competencia 2</td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-        </div>
-        <br />
-        <div class="col s4">
-          <table class="centered tabla2">
-            <thead>
-              <tr>
-                <th>Resultados <i class="material-icons">create</i></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Competencia 1
-                  <i class="material-icons transformed">change_history</i>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Competencia 2
-                  <i class="material-icons transformed">change_history</i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="center-align boton2">
-        <a class="waves-effect waves-light btn orange-sac" routerLink="/home"
-          >Guardar</a
-        >
-      </div>
+      </form>
     </div>
   </div>
 </div>
