@@ -1,77 +1,91 @@
 <div class="container">
   <div class="row">
     <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">
+      <!-- class="second-contain" -->
       <h2 class="center">Datos personales</h2>
-      <div class="row">
-        <div class="col s4">
-          <h6>Nombres<i class="material-icons">create</i></h6>
-          <label for="nombre">Nombres</label>
-          <h6>Documento<i class="material-icons">create</i></h6>
-          <label for="Documento">Documento</label>
-          <h6>Celular/Ext.SENA<i class="material-icons">create</i></h6>
-          <label for="celular">Celular/Ext.SENA</label>
-          <h6>Centro<i class="material-icons">create</i></h6>
-          <label for="centro">Centro</label>
-          <div class="left-align boton">
-            <a class="waves-effect waves-light btn gray-sac subBtn">Cambiar Contraseña</a>
+      <form [formGroup]="myprofile" (ngSubmit)="onSubmit()">
+        <div class="row center">
+          <div class="col s4">
+            <h6>
+              Nombres
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="name_u" />
+            <h6>
+              Celular/Ext.SENA
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="phone_u" />
+            <h6>
+              Centro
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="center_u" />
+          </div>
+          <div class="col s4">
+            <h6>
+              Apellidos
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="lastname_u" />
+            <h6>
+              Regional
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="regional_u" />
+            <h6>Tipo<i class="material-icons">create</i></h6>
+            <p class="opt">
+              <label>
+                <input
+                  class="with-gap"
+                  formControlName="bonding_type"
+                  name="bonding_type"
+                  value="1"
+                  type="radio"
+                />
+                <span>Planta</span>
+              </label>
+            </p>
+            <p class="opt">
+              <label>
+                <input
+                  class="with-gap"
+                  formControlName="bonding_type"
+                  name="bonding_type"
+                  value="2"
+                  type="radio"
+                />
+                <span>Contratista</span>
+              </label>
+            </p>
+          </div>
+          <div class="col s4">
+            <h6>
+              Ciudad de residencia
+              <i class="material-icons">create</i>
+            </h6>
+            <input type="text" formControlName="city_u" />
+            <div class="left-align boton">
+              <button
+                class="waves-effect waves-light btn gray-sac subBtn"
+                type="submit"
+                (click)="newPass()"
+                [disabled]="estado"
+              >
+                Cambiar Contraseña
+              </button>
+            </div>
+            <div *ngIf="estado">
+              <input type="password" formControlName="password_u" />
+            </div>
           </div>
         </div>
-        <div class="col s4">
-          <h6>Apellidos<i class="material-icons">create</i></h6>
-          <label for="nombre">Apellidos</label>
-          <h6>Correo Institucional<i class="material-icons">create</i></h6>
-          <label for="correoInstitucional">Correo Institucional</label>
-          <h6>Regional<i class="material-icons">create</i></h6>
-          <label for="regional">Regional</label>
-          <h6>Tipo<i class="material-icons">create</i></h6>
-          <label for="tipo">Tipo</label>
+        <div class="center-align boton2">
+          <button class="waves-effect waves-light btn orange-sac" type="submit">
+            Guardar
+          </button>
         </div>
-        <div class="col s4">
-          <table class="centered tabla1">
-            <thead>
-              <tr>
-                <th>Competencias <i class="material-icons">create</i></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Competencia 1</td>
-              </tr>
-              <tr>
-                <td>Competencia 2</td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-        </div>
-        <br />
-        <div class="col s4">
-          <table class="centered tabla2">
-            <thead>
-              <tr>
-                <th>Resultados <i class="material-icons">create</i></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Competencia 1
-                  <i class="material-icons transformed">change_history</i>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Competencia 2
-                  <i class="material-icons transformed">change_history</i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="center-align boton2">
-        <a class="waves-effect waves-light btn orange-sac" routerLink="/home">Guardar</a>
-      </div>
+      </form>
     </div>
   </div>
 </div>

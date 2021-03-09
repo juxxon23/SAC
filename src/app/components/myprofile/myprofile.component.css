@@ -57,6 +57,14 @@ label {
     padding: 0 20% 0 0;
 }
 
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;        
+}
+
 .subBtn {
     border: 1px solid black;
 }
