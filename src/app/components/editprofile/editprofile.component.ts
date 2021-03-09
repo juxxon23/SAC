@@ -16,7 +16,7 @@ export class EditprofileComponent implements OnInit {
     private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   //url_editprofile: string = 'https://floating-falls-31326.herokuapp.com/signin';
   url_editprofile: string = 'http://127.0.0.1:5000/signin';
@@ -37,7 +37,7 @@ export class EditprofileComponent implements OnInit {
       regional_u: [''],
       center_u: [''],
       bonding_type: [''],
-      doc_u: [localStorage.getItem('doc_u')],
+      document_u: [localStorage.getItem('currentUser')],
     });
   }
 
@@ -54,6 +54,26 @@ export class EditprofileComponent implements OnInit {
           break;
         case 'error':
           this.router.navigate(['/editprofile']);
+          break;
+      }
+    }, (error) => {
+      let srv_error = error.error;
+      switch (srv_error) {
+        case 'exception':
+          alert('Exception');
+          console.log(srv_error['error']);
+          break
+        case 'sqlalchemy get_by':
+          alert('Sqlalchemy Exception');
+          console.log(srv_error['ex']);
+          break;
+        case 'postgres_tool get_by':
+          alert('Postgresql Exception');
+          console.log(srv_error['ex']);
+          break;
+        default:
+          alert('Debe ingresar todos los datos');
+          console.log(srv_error['ex']);
           break;
       }
     });

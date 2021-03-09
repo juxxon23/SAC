@@ -2,91 +2,87 @@
   <div class="row">
     <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">
       <!-- class="second-contain" -->
-      <h2 class="center">Datos personales<button type="submit" (click)="onButtonClick()" >
-        <i class="material-icons">create</i>
-      </button></h2>
-      <form [formGroup]="myprofile" >
+      <h2 class="center">Datos personales</h2>
+      <form [formGroup]="myprofile" (ngSubmit)="onSubmit()">
         <div class="row center">
           <div class="col s4">
             <h6>
-              Nombres<button type="submit">
-                <i class="material-icons">create</i>
-              </button>
+              Nombres
+              <i class="material-icons">create</i>
             </h6>
-            <input type="text" formControlName="name_u"  [disabled]="click"/>
+            <input type="text" formControlName="name_u" />
             <h6>
-              Celular/Ext.SENA<button id="phone">
-                <i class="material-icons">create</i>
-              </button>
+              Celular/Ext.SENA
+              <i class="material-icons">create</i>
             </h6>
-            <input type="text" [disabled]="click" />
+            <input type="text" formControlName="phone_u" />
             <h6>
-              Centro<button id="center">
-                <i class="material-icons">create</i>
-              </button>
+              Centro
+              <i class="material-icons">create</i>
             </h6>
             <input type="text" formControlName="center_u" />
-            <div class="left-align boton">
-              <a
-                class="waves-effect waves-light btn gray-sac subBtn"
-                routerLink="/home"
-                >Cambiar Contraseña</a
-              >
-            </div>
           </div>
           <div class="col s4">
             <h6>
-              Apellidos<button id="lastname">
-                <i class="material-icons">create</i>
-              </button>
+              Apellidos
+              <i class="material-icons">create</i>
             </h6>
             <input type="text" formControlName="lastname_u" />
             <h6>
-              Regional<button id="regional">
-                <i class="material-icons">create</i>
-              </button>
+              Regional
+              <i class="material-icons">create</i>
             </h6>
             <input type="text" formControlName="regional_u" />
-            <h6>
-              Tipo<button><i class="material-icons">create</i></button>
-            </h6>
-            <input type="text" formControlName="bonding_type" />
+            <h6>Tipo<i class="material-icons">create</i></h6>
+            <p class="opt">
+              <label>
+                <input
+                  class="with-gap"
+                  formControlName="bonding_type"
+                  name="bonding_type"
+                  value="1"
+                  type="radio"
+                />
+                <span>Planta</span>
+              </label>
+            </p>
+            <p class="opt">
+              <label>
+                <input
+                  class="with-gap"
+                  formControlName="bonding_type"
+                  name="bonding_type"
+                  value="2"
+                  type="radio"
+                />
+                <span>Contratista</span>
+              </label>
+            </p>
           </div>
           <div class="col s4">
             <h6>
-              Ciudad de residencia<button>
-                <i class="material-icons">create</i>
-              </button>
+              Ciudad de residencia
+              <i class="material-icons">create</i>
             </h6>
             <input type="text" formControlName="city_u" />
+            <div class="left-align boton">
+              <button
+                class="waves-effect waves-light btn gray-sac subBtn"
+                type="submit"
+                (click)="newPass()"
+                [disabled]="estado"
+              >
+                Cambiar Contraseña
+              </button>
+            </div>
+            <div *ngIf="estado">
+              <input type="password" formControlName="password_u" />
+            </div>
           </div>
         </div>
         <div class="center-align boton2">
-          <button
-            class="waves-effect waves-light btn orange-sac"
-            type="submit"
-            *ngIf="!stateSp"
-          >
+          <button class="waves-effect waves-light btn orange-sac" type="submit">
             Guardar
-            <div *ngIf="!stateSp">Editar Perfil</div>
-            <div class="cont-sp">
-              <div class="preloader-wrapper small active" *ngIf="stateSp">
-                <div
-                  class="spinner-layer"
-                  [ngStyle]="{ 'border-color': '#001935' }"
-                >
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </button>
         </div>
       </form>
