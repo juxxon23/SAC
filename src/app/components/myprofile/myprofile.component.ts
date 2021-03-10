@@ -38,7 +38,7 @@ export class MyprofileComponent implements OnInit {
       center_u: [''],
       bonding_type: [''],
       city_u: [''],
-      document_u: [localStorage.getItem('currentUser')]
+      document_u: [this.auth.getCurrentUser()]
     })
   }
 

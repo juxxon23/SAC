@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('tks');
+    localStorage.removeItem('tkse');
     this.deleteCurrentAct();
     this.deleteCurrentUser();
     this.isLogin.next(false);

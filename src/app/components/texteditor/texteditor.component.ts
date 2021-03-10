@@ -39,7 +39,7 @@ export class TexteditorComponent implements OnInit {
     } catch (err) {
       setTimeout(() => {
         this.verifyEdit()
-      }, 1000)
+      }, 2000)
     }
   }
 

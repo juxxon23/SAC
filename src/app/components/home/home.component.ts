@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
+//import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 
 import { HttpToolService } from '../../services/http-tool.service';
 import { AuthService } from '../../services/auth.service';
-import { DocumentToolService } from '../../services/document-tool.service';
 
 
 @Component({
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private rs: HttpToolService,
-    private dt: DocumentToolService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -29,8 +27,8 @@ export class HomeComponent implements OnInit {
   options = {}
 
   ngOnInit() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, this.options);
+    //var elems = document.querySelectorAll('select');
+    //var instances = M.FormSelect.init(elems, this.options);
   }
 
   findActs() {
