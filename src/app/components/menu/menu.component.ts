@@ -20,19 +20,9 @@ export class MenuComponent implements OnInit {
     $(".button-collapse").sideNav({
       menuWidth: 300, // Default is 300
       edge: 'right', // Choose the horizontal origin);
+      closeOnClick: true, // Closes side-nav on <a> clicks
     });
-    /*
-    this.auth.isLoggedIn().subscribe((res) => {
-      console.log(res);
-      if (res) {
-        $(".button-collapse").sideNav({
-          menuWidth: 300, // Default is 300
-          edge: 'right', // Choose the horizontal origin);
-        });
-        console.log('iniciado');
-      }
-    });
-    */
+    $('.collapsible').collapsible();
   }
 
   logout(){
