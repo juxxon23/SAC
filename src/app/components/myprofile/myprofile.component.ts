@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpToolService } from 'src/app/services/http-tool.service';
-
+import { Routes } from 'src/app/constant/routes';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class MyprofileComponent implements OnInit {
     public auth: AuthService
   ) { }
 
-  url_myprofile: string = 'http://127.0.0.1:5000/signin';
+  url_myprofile: string = Routes.url_base_local + Routes.url_signin;
   dataEx: JSON;
   state: string;
   error: any;

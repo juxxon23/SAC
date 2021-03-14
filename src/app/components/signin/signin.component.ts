@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpToolService } from '../../services/http-tool.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
+import { HttpToolService } from 'src/app/services/http-tool.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Routes } from 'src/app/constant/routes';
 
 @Component({
   selector: 'app-signin',
@@ -18,8 +21,7 @@ export class SigninComponent implements OnInit {
     public auth: AuthService
   ) { }
 
-  //url_signin: string = 'https://floating-falls-31326.herokuapp.com/signin';
-  url_signin: string = 'http://127.0.0.1:5000/signin';
+  url_signin: string = Routes.url_base_local + Routes.url_signin;
   dataEx: JSON;
   state: string;
   error: any;

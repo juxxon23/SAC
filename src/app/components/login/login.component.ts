@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpToolService } from '../../services/http-tool.service';
-import { AuthService } from '../../services/auth.service';
+import { HttpToolService } from 'src/app/services/http-tool.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Routes } from 'src/app/constant/routes';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,7 @@ export class LoginComponent implements OnInit {
     public auth: AuthService,
   ) { }
 
-  //url_login: string = 'https://floating-falls-31326.herokuapp.com/login';
-  url_login: string = 'http://127.0.0.1:5000/login';
+  url_login: string = Routes.url_base_local + Routes.url_login;
   state: string;
   login: FormGroup;
 

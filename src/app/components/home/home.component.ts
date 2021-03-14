@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 //import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 
-import { HttpToolService } from '../../services/http-tool.service';
-import { AuthService } from '../../services/auth.service';
+import { HttpToolService } from 'src/app/services/http-tool.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Routes } from 'src/app/constant/routes';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  url_doc: string = 'http://127.0.0.1:5000/document';
+  url_doc: string = Routes.url_base_local + Routes.url_document;
   header_list = ['index', '_id', 'document_u', 'content', 'get_doc'];
   rows = [];
   table_state: boolean = false;
