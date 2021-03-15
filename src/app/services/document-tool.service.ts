@@ -11,7 +11,6 @@ export class DocumentToolService {
     public auth: AuthService
   ) { }
 
-  newAssistant: string = '<tr class="instru"><td class="num-asis" style="text-align: center;"></td><td colspan="2"><span class="full-name" style="text-indent: 0.34em;"></span></td><td><span class="id-instru" style="margin-left: 0.58em;"></span></td><td class="bonding-type" style="text-align: center;"></td><td class="bonding-type" style="text-align: center;"></td><td class="company-depen" colspan="2"></td><td colspan="2"><span class="mail-instru" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext" style="text-indent: 0.01em;"></span></td><td><br></td></tr>';
   act: any;
   rows: any;
   currContent: any;
@@ -27,7 +26,9 @@ export class DocumentToolService {
     'topic',
     'objective'
   ];
-  bodyKey: string = 'body-act';
+  bodyKey: any = [
+    'start-deact',
+    'end-deact'];
   footerKeys: any = [
     'activity',
     'respo',
@@ -70,7 +71,8 @@ export class DocumentToolService {
   }
 
   bodyContentV1() {
-    this.writeContent(this.bodyKey, this.currContent['body']);
+    let e = this.framDoc.getElementsByClassName('start-deact');
+    e[0].innerHTML = this.currContent['body_h'];
   }
 
   footerContent() {
@@ -79,44 +81,63 @@ export class DocumentToolService {
 
   listAssis() {
     let lisass: any, l: number, i: number, la: any, lal: number, colTable: string, e: any, el: number;
+    let opt: string = "assis";
     lisass = this.currContent['footer']['list_asis'];
     l = lisass.length;
-    colTable = this.addAssistant(lisass.length);
+    colTable = this.addAssistant(l);
     // Insertar filas a lista de asistencia
     e = this.framDoc.getElementsByTagName('tr');
     el = e.length;
     e[el - 1].insertAdjacentHTML('afterEnd', colTable);
-    e[el - l].remove();
-    // Insertar los datos de los assitentes
-    la = this.framDoc.getElementsByClassName(this.instruKey);
-    lal = la.length;
-    for (i = 0; i < lal; i++) {
-      this.accessContent(this.assistantKeys, lisass[i]);
-    }
+    this.accessContent(this.assistantKeys, lisass, opt);
+    let dd: any = this.framDoc.getElementsByClassName('instru');
+    dd[0].remove();
   }
 
   addAssistant(n: number) {
+    let newAssistant: string = '';
     if (n == 1) {
-      return this.newAssistant;
-    } else {
-      return this.newAssistant.repeat(n);
+      newAssistant = '<tr class="instru"><td class="num-asis" style="text-align: center;"></td><td colspan="2"><span class="full-name" style="text-indent: 0.34em;"></span></td><td><span class="id-instru" style="margin-left: 0.58em;"></span></td><td class="bonding-type" style="text-align: center;"></td><td class="bonding-type" style="text-align: center;"></td><td class="company-depen" colspan="2"></td><td colspan="2"><span class="mail-instru" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext" style="text-indent: 0.01em;"></span></td><td><br></td></tr>';;
+      return newAssistant;
     }
-
+    else {
+      for (let i = 0; i < n; i++) {
+        newAssistant += `<tr class="instru"><td class="num-asis${i}" style="text-align: center;"></td><td colspan="2"><span class="full-name${i}" style="text-indent: 0.34em;"></span></td><td><span class="id-instru${i}" style="margin-left: 0.58em;"></span></td><td class="bonding-type${i}" style="text-align: center;"></td><td class="bonding-type${i}" style="text-align: center;"></td><td class="company-depen${i}" colspan="2"></td><td colspan="2"><span class="mail-instru${i}" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext${i}" style="text-indent: 0.01em;"></span></td><td><br></td></tr>`;
+      }
+      return newAssistant;
+    }
   }
 
-  accessContent(sectionKeys: any, content: any) {
-    let l: number, n: number, i: number, k: string, kc: string;
+  accessContent(sectionKeys: any, content: any, opt: string = "default") {
+    let l: number, n: number, i: number, k: string, kc: string, inst: any;
+    let m: any = [];
     l = sectionKeys.length;
     for (i = 0; i < l; i++) {
       k = sectionKeys[i]
       n = k.search('-')
       if (n > 0) {
         kc = k.replace('-', '_');
-        this.writeContent(k, content[kc]);
+        m[i] = kc
       } else {
-        this.writeContent(k, content[k]);
+        m[i] = k
       }
-
+    }
+    if (opt == "default") {
+      for (i = 0; i < l; i++) {
+        let ind: string = m[i];
+        this.writeContent(sectionKeys[i], content[ind]);
+      }
+    } else if (opt == "assis") {
+      let la = this.framDoc.getElementsByClassName(this.instruKey);
+      let lal = la.length - 1;
+      for (i = 0; i < lal; i++) {
+        inst = content[i];
+        for (let j = 0; j < l; j++) {
+          let sk: string = sectionKeys[j] + i.toString();
+          let ind: string = m[j];
+          this.writeContent(sk, inst[ind]);
+        }
+      }
     }
   }
 
@@ -136,6 +157,7 @@ export class DocumentToolService {
       }
     }
   }
+
 
   getAct(doc: any): any {
     this.act = {
