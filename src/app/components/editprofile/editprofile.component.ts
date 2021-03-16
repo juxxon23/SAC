@@ -7,6 +7,8 @@ import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { Routes } from 'src/app/constant/routes';
 
+declare var $: any;
+
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
@@ -27,9 +29,9 @@ export class EditprofileComponent implements OnInit {
   editprofile: FormGroup;
 
   ngOnInit() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems);
-
+    //var elems = document.querySelectorAll('select');
+    //var instances = M.FormSelect.init(elems);
+    $('select').material_select();
     this.editprofile = this.fb.group({
       name_u: [''],
       lastname_u: [''],

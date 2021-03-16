@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { Routes } from 'src/app/constant/routes';
 
+declare var $: any;
 
 @Component({
   selector: 'app-myprofile',
@@ -30,6 +31,7 @@ export class MyprofileComponent implements OnInit {
   estado: boolean = false;
 
   ngOnInit(): void {
+    $('select').material_select();
     this.myprofile = this.fb.group({
       password_u: [''],
       name_u: [''],
