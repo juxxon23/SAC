@@ -1,91 +1,91 @@
-<div class="container">
-  <div class="row">
-    <div class="contain-myprofile gray-sac" *ngIf="auth.isLoggedIn() | async">
-      <!-- class="second-contain" -->
-      <h2 class="center">Datos personales</h2>
-      <form [formGroup]="myprofile" (ngSubmit)="onSubmit()">
-        <div class="row center">
-          <div class="col s4">
-            <h6>
-              Nombres
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="name_u" />
-            <h6>
-              Celular/Ext.SENA
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="phone_u" />
-            <h6>
-              Centro
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="center_u" />
-          </div>
-          <div class="col s4">
-            <h6>
-              Apellidos
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="lastname_u" />
-            <h6>
-              Regional
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="regional_u" />
-            <h6>Tipo<i class="material-icons">create</i></h6>
-            <p class="opt">
-              <label>
-                <input
-                  class="with-gap"
-                  formControlName="bonding_type"
-                  name="bonding_type"
-                  value="1"
-                  type="radio"
-                />
-                <span>Planta</span>
-              </label>
-            </p>
-            <p class="opt">
-              <label>
-                <input
-                  class="with-gap"
-                  formControlName="bonding_type"
-                  name="bonding_type"
-                  value="2"
-                  type="radio"
-                />
-                <span>Contratista</span>
-              </label>
-            </p>
-          </div>
-          <div class="col s4">
-            <h6>
-              Ciudad de residencia
-              <i class="material-icons">create</i>
-            </h6>
-            <input type="text" formControlName="city_u" />
-            <div class="left-align boton">
-              <button
-                class="waves-effect waves-light btn gray-sac subBtn"
-                type="submit"
-                (click)="newPass()"
-                [disabled]="estado"
-              >
+<div class="cont-body">
+  <div class="container">
+    <div class="row row-ne">
+      <div class="container">
+        <div class="info-edit">
+          <h4 class="edit">Mi perfil</h4>
+          <p>Edita tus datos personales</p>
+        </div>
+        <div>
+          <form class="col s12 contain-edit" [formGroup]="myprofile" (ngSubmit)="onSubmit()">
+            <div class="row row-ne">
+              <div class="input-field col s6">
+                <i class="material-icons prefix blue-sac">face</i>
+                <input formControlName="name_u" type="text" class="validate" />
+                <label for="name_u">Nombres</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix blue-sac">face</i>
+                <input formControlName="lastname_u" type="text" class="validate" />
+                <label for="lastname_u">Apellidos</label>
+              </div>
+            </div>
+            <div class="row row-ne">
+              <div class="input-field col s6">
+                <i class="material-icons prefix blue-sac">call</i>
+                <input formControlName="phone_u" type="tel" class="validate" />
+                <label for="phone_u">Celular/Ext. SENA</label>
+              </div>
+              <div class="viin">
+                <p class="title-vin">Tipo de vinculación</p>
+              </div>
+              <div class="col s6 vinculacion">
+                <p class="opt">
+                  <input class="with-gap" formControlName="bonding_type" name="bonding_type" value=1 type="radio"
+                    id="plant" />
+                  <label for="plant">Planta</label>
+                </p>
+                <p class="opt">
+                  <input class="with-gap" formControlName="bonding_type" name="bonding_type" value=2 type="radio"
+                    id="contra" />
+                  <label for="contra">Contratista</label>
+                </p>
+              </div>
+            </div>
+            <div class="row row-ne">
+              <i class="material-icons left blue-sac ban">flag</i>
+              <div class="input-field col s5 howa">
+                <select formControlName="regional_u">
+                  <option value="" disabled selected>Seleccion su regional</option>
+                  <option value="Quindio">Quindio</option>
+                  <option value="Antioquia">Antioquia</option>
+                  <option value="Putumayo">Putumayo</option>
+                </select>
+                <label>Regional</label>
+              </div>
+              <i class="material-icons left blue-sac doma">domain</i>
+              <div class="input-field col s5 howa">
+                <select formControlName="center_u">
+                  <option value="" disabled selected>Seleccion su centro</option>
+                  <option value="Centro de comercio y tu rismo">Centro de comercio</option>
+                  <option value="Centro2">Centro2</option>
+                  <option value="Centro3">Centro3</option>
+                </select>
+                <label>Centro</label>
+              </div>
+            </div>
+            <div class="row row-ne">
+              <div class="input-field col s6">
+                <i class="material-icons prefix blue-sac">crop_original</i>
+                <input formControlName="city_u" type="text" class="validate" />
+                <label for="city_u">Ciudad</label>
+              </div>
+
+              <button class="waves-effect waves-light btn gray-sac subBtn" type="button" (click)="newPass()"
+                [disabled]="estado">
                 Cambiar Contraseña
               </button>
+
+              <div class="col s6" *ngIf="estado">
+                <input type="password" formControlName="password_u" />
+              </div>
             </div>
-            <div *ngIf="estado">
-              <input type="password" formControlName="password_u" />
+            <div class="center-align boton1">
+              <button class="waves-effect waves-light btn orange-sac" type="submit">Guardar</button>
             </div>
-          </div>
+          </form>
         </div>
-        <div class="center-align boton2">
-          <button class="waves-effect waves-light btn orange-sac" type="submit">
-            Guardar
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
