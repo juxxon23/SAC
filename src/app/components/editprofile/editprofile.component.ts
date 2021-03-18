@@ -29,8 +29,6 @@ export class EditprofileComponent implements OnInit {
   editprofile: FormGroup;
 
   ngOnInit() {
-    //var elems = document.querySelectorAll('select');
-    //var instances = M.FormSelect.init(elems);
     $('select').material_select();
     this.editprofile = this.fb.group({
       name_u: [''],

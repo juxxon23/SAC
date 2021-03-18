@@ -3,8 +3,8 @@
     <div class="row row-ne">
       <div class="container">
         <div class="info-edit">
-          <h4 class="edit">Edita tu perfil</h4>
-          <p>Asi podremos autocompletar campos cuando diligencies tus actas.</p>
+          <h4 class="edit">Complete su perfil</h4>
+          <p>Asi podremos autocompletar informacion al construir sus actas.</p>
         </div>
         <div>
           <form class="col s12 contain-edit" [formGroup]="editprofile" (ngSubmit)="onSubmit()">
@@ -48,8 +48,6 @@
                 <select formControlName="regional_u">
                   <option value="" disabled selected>Seleccion su regional</option>
                   <option value="Quindio">Quindio</option>
-                  <option value="Antioquia">Antioquia</option>
-                  <option value="Putumayo">Putumayo</option>
                 </select>
                 <label>Regional</label>
               </div>
@@ -58,18 +56,18 @@
                 <select formControlName="center_u">
                   <option value="" disabled selected>Seleccion su centro</option>
                   <option value="Centro de comercio y tu rismo">Centro de comercio</option>
-                  <option value="Centro2">Centro2</option>
-                  <option value="Centro3">Centro3</option>
                 </select>
                 <label>Centro</label>
               </div>
-              <div class="input-field col s6 center-align">
-                <i class="material-icons prefix blue-sac">crop_original</i>
-                <input formControlName="city_u" type="text" class="validate" />
-                <label for="city_u">Ciudad de residencia</label>
+              <i class="material-icons left blue-sac doma">domain</i>
+              <div class="input-field col s5 howa">
+                <select formControlName="city_u">
+                  <option value="" disabled selected>Seleccion su ciudad</option>
+                  <option value="Armenia">Armenia</option>
+                </select>
+                <label>Ciudad</label>
               </div>
             </div>
-
             <div class="center-align boton1">
               <button class="waves-effect waves-light btn orange-sac" type="submit">Guardar</button>
             </div>
