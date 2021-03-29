@@ -5,4 +5,5 @@ export class Routes {
     public static url_login: string = 'login';
     public static url_document: string = 'document';
     public static url_ch: string = 'ch';
+    public static url_search: string = 'search';
 }

@@ -13,6 +13,8 @@ export class DocumentToolService {
 
   act: any;
   rows: any;
+  tableContent: any = [];
+  tabCurrent: any;
   currContent: any;
   framDoc: any;
   headerKeys: any = [
@@ -27,15 +29,16 @@ export class DocumentToolService {
     'objective'
   ];
   bodyKey: any = [
-    'start-deact',
-    'end-deact'];
+    'deact',
+    'conclusion'
+  ];
   footerKeys: any = [
     'activity',
     'respo',
     'date-act',
-    'obser',
+    'img-assis',
     'reg-asis',
-    'objective'
+    'objective-assis'
   ];
   instruKey: string = 'instru';
   assistantKeys: any = [
@@ -47,6 +50,94 @@ export class DocumentToolService {
     'mail-instru',
     'phone-ext'
   ];
+
+  setCurrentTable() {
+    this.getFrameDocument();
+    this.tabCurrent = this.framDoc.getElementsByTagName('table');
+    return this.tabCurrent;
+  }
+
+  setContentTable(content: any) {
+    let tab: any, r: any, l: any, lcc: number, lc: number;
+    tab = this.setCurrentTable();
+    for (let i = 0; i < tab.length; i++) {
+      r = tab[i].rows;
+      for (let j = 0; j < r.length; j++) {
+        l = r[j].cells;
+        if (l.length == 1) {
+          lcc = l[0].children.length;
+          // Si solo tiene un elemento hijo
+          if (lcc == 0 || lcc == 1) {
+            l[0].innerText = content[i][j];
+          } else {
+            for (let m = 0; m < lcc; m++) {
+              l[0].children[m].innerText = content[i][j][m];
+            }
+          }
+        } else {
+          for (let k = 0; k < l.length; k++) {
+            lc = l[k].children.length;
+            // Si solo tiene un elemento hijo
+            if (lc == 1) {
+              l[k].children[0].innerText = content[i][j][k];
+            } else {
+              for (let m = 0; m < lc; m++) {
+                l[k].children[m].innerText = content[i][j][k][m]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  getContentTable(): any {
+    let tab: any, r: any, l: any, lcc: number, lc: number;
+    tab = this.setCurrentTable();
+    for (let i = 0; i < tab.length; i++) {
+      r = tab[i].rows;
+      this.tableContent[i] = []
+      // Recorre sobre las filas
+      for (let j = 0; j < r.length; j++) {
+        l = r[j].cells;
+        // Si solo tiene una columna
+        if (l.length == 1) {
+          lcc = l[0].children.length;
+          // Si solo tiene un elemento hijo
+          if (lcc == 0 || lcc == 1) {
+            this.tableContent[i][j] = l[0].innerText;
+          } else {
+            this.tableContent[i][j] = [];
+            let childTab: any = [];
+            // Sino guarda el texto de cada elemento hijo
+            for (let m = 0; m < lcc; m++) {
+              childTab.push(l[0].children[m].innerText);
+            }
+            this.tableContent[i][j] = childTab;
+          }
+        } else {
+          // Sino tiene solo una columna
+          this.tableContent[i][j] = [];
+          // Recorre sobre las columnas
+          for (let k = 0; k < l.length; k++) {
+            lc = l[k].children.length;
+            // Si solo tiene un elemento hijo
+            if (lc == 1) {
+              this.tableContent[i][j][k] = l[k].children[0].innerText;
+            } else {
+              let childTab: any = [];
+              // Sino guarda el texto de cada elemento hijo
+              for (let m = 0; m < lc; m++) {
+                childTab.push(l[k].children[m].innerText);
+              }
+              this.tableContent[i][j][k] = childTab;
+            }
+          }
+        }
+      }
+    }
+    return this.tableContent;
+  }
 
   updateContent(content: any): any {
     this.setCurrentContent(content);

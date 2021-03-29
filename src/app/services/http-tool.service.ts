@@ -8,18 +8,21 @@ export class HttpToolService {
 
   constructor(public http: HttpClient) { }
 
-  getRequest(url: string, data?: any, token?: string){
+  getRequest(url: string, id_u?: any, id_a?: any, token?: string){
     const config: any = {
       responseType: 'json',
     };
+    let header = new HttpHeaders();
     if (token){
-      const header = new HttpHeaders().set('Authorizaton', `Bearer${token}`);
-      config.headers = header;
+      header = header.append('Authorizaton', `Bearer${token}`);
     }
-    if (data) {
-      const header = new HttpHeaders().set('id_a', data);
-      config.headers = header;
+    if (id_u) {
+      header = header.set('id_u', id_u);
     }
+    if (id_a) {
+      header = header.set('id_a', id_a);  
+    }
+    config.headers = header;
     return this.http.get(url, config);
   }
 
