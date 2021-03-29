@@ -6,6 +6,9 @@ import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Routes } from 'src/app/constant/routes';
 
+import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
+import { UserAlertsService } from 'src/app/services/user-alerts.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +22,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private rs: HttpToolService,
     public auth: AuthService,
+    private alertsService: UserAlertsService
   ) { }
 
   url_login: string = Routes.url_base_local + Routes.url_login;
@@ -42,37 +46,10 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home'], { relativeTo: this.route });
           }
         }, (error) => {
-          let srv_error = error.error;
-          switch (srv_error['status']) {
-            case 'user':
-              alert('The user doesn\'t exists');
-              break;
-            case 'password':
-              alert('Incorrect Password');
-              break;
-            case 'validators':
-              alert('Incorrect Data Form');
-              console.log(srv_error['error']);
-              break;
-            case 'exception':
-              alert('Exception');
-              console.log(srv_error['ex']);
-              break;
-            case 'sqlalchemy get_by':
-              alert('Sqlalchemy Exception');
-              console.log(srv_error['ex']);
-              break;
-            case 'postgres_tool get_by':
-              alert('Postgresql Exception');
-              console.log(srv_error['ex']);
-              break;
-            default:
-              alert('Unknown Error');
-              break;
-          }
+          this.alertsService.alerLogin(error);
         });
     } else {
-      alert('Form Error');
+      M.toast('Error en el formulario', 4000)
     }
   }
 }

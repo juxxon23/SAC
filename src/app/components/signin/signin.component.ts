@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Routes } from 'src/app/constant/routes';
+import { UserAlertsService } from 'src/app/services/user-alerts.service';
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +20,8 @@ export class SigninComponent implements OnInit {
     private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute,
-    public auth: AuthService
+    public auth: AuthService,
+    private alertsService: UserAlertsService
   ) { }
 
   url_signin: string = Routes.url_base_local + Routes.url_signin;
@@ -54,29 +57,7 @@ export class SigninComponent implements OnInit {
                 this.router.navigate(['/editprofile'], { relativeTo: this.route });
               }
             }, (error) => {
-              let srv_error = error.error;
-              switch (srv_error['status']) {
-                case 'validators':
-                  alert('Incorrect Data Form');
-                  console.log(srv_error['error']);
-                  break;
-                case 'exception':
-                  alert('Exception')
-                  console.log(srv_error['ex']);
-                  this.router.navigate(['/signin']);
-                  break;
-                case 'sqlalchemy get_by':
-                  alert('Sqlalchemy Exception');
-                  console.log(srv_error['ex']);
-                  break;
-                case 'postgres_tool get_by':
-                  alert('Postgresql Exception');
-                  console.log(srv_error['ex']);
-                  break;
-                default:
-                  alert('Unknown Error');
-                  break;
-              }
+              this.alertsService.alertSignin(error);
             });
           form.password_c = ''
         } else {
@@ -87,40 +68,15 @@ export class SigninComponent implements OnInit {
                 alert('Register Complete');
               }
             }, (error) => {
-              let srv_error = error.error;
-              switch (srv_error['status']) {
-                case 'user':
-                  alert('The user doesn\'t exists');
-                  console.log(srv_error['msg']);
-                case 'validators':
-                  alert('Incorrect Data Form');
-                  console.log(srv_error['error']);
-                  break;
-                case 'exception':
-                  alert('Exception')
-                  console.log(srv_error['ex']);
-                  this.router.navigate(['/signin']);
-                  break;
-                case 'sqlalchemy get_by':
-                  alert('Sqlalchemy Exception');
-                  console.log(srv_error['ex']);
-                  break;
-                case 'postgres_tool get_by':
-                  alert('Postgresql Exception');
-                  console.log(srv_error['ex']);
-                  break;
-                default:
-                  alert('Unknown Error');
-                  break;
-              }
+              this.alertsService.alertSignin(error);
             });
           form.password_c = ''
         }
       } else {
-        console.log('Passwords do not match');
+        M.toast('Las contraseñas no coinciden', 4000)
       }
     } else {
-      console.log('Form Error');
+      M.toast('Error en el formulario', 4000)
     }
   }
 }
