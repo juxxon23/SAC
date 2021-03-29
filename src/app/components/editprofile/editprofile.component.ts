@@ -6,6 +6,8 @@ import * as M from 'node_modules/materialize-css/dist/js/materialize.min.js';
 
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { Routes } from 'src/app/constant/routes';
+import { UserAlertsService } from 'src/app/services/user-alerts.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var $: any;
 
@@ -19,8 +21,10 @@ export class EditprofileComponent implements OnInit {
     private fb: FormBuilder,
     private rs: HttpToolService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private alertsService: UserAlertsService,
+    public auth: AuthService
+  ) { }
 
   url_editprofile: string = Routes.url_base_local + Routes.url_signin;
   dataEx: JSON;
@@ -30,6 +34,12 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit() {
     $('select').material_select();
+    this.auth.isLoggedIn().subscribe((data) =>{
+      if (data) {
+        this.router.navigate(['/home']);
+      }
+    });
+    
     this.editprofile = this.fb.group({
       name_u: [''],
       lastname_u: [''],
@@ -43,40 +53,22 @@ export class EditprofileComponent implements OnInit {
   }
 
   onSubmit() {
-    var form = this.editprofile.value;
-    this.rs.putRequest(this.url_editprofile, form).subscribe((data: any) => {
-      this.dataEx = data;
-      console.log(this.dataEx);
-      this.state = this.dataEx['status'];
-      switch (this.state) {
-        case 'ok':
+    var select = document.getElementsByTagName("select");
+    this.editprofile.value['regional_u']= select[0].value
+    this.editprofile.value['center_u']= select[1].value
+    this.editprofile.value['city_u']= select[2].value
+    if (this.editprofile.valid) {
+      this.rs.putRequest(this.url_editprofile, this.editprofile.value).subscribe((data: any) => {
+        if (data['status'] == 'ok') {
           localStorage.removeItem('doc_u')
           this.router.navigate(['/home'], { relativeTo: this.route });
-          break;
-        case 'error':
-          this.router.navigate(['/editprofile']);
-          break;
-      }
-    }, (error) => {
-      let srv_error = error.error;
-      switch (srv_error) {
-        case 'exception':
-          alert('Exception');
-          console.log(srv_error['error']);
-          break
-        case 'sqlalchemy get_by':
-          alert('Sqlalchemy Exception');
-          console.log(srv_error['ex']);
-          break;
-        case 'postgres_tool get_by':
-          alert('Postgresql Exception');
-          console.log(srv_error['ex']);
-          break;
-        default:
-          alert('Debe ingresar todos los datos');
-          console.log(srv_error['ex']);
-          break;
-      }
-    });
+        }
+      }, (error) => {
+        this.alertsService.alertSigninExtra(error);
+      });
+    } else {
+      M.toast('Error en el formulario', 4000)
+    }
+
   }
 }

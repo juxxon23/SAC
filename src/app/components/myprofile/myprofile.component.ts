@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { Routes } from 'src/app/constant/routes';
+import { UserAlertsService } from 'src/app/services/user-alerts.service';
 
 declare var $: any;
 
@@ -20,7 +21,8 @@ export class MyprofileComponent implements OnInit {
     private rs: HttpToolService,
     private router: Router,
     private route: ActivatedRoute,
-    public auth: AuthService
+    public auth: AuthService,
+    private alertsService: UserAlertsService
   ) { }
 
   url_myprofile: string = Routes.url_base_local + Routes.url_signin;
@@ -50,6 +52,10 @@ export class MyprofileComponent implements OnInit {
   }
 
   onSubmit() {
+    var select = document.getElementsByTagName("select");
+    this.myprofile.value['regional_u']= select[0].value
+    this.myprofile.value['center_u']= select[1].value
+    this.myprofile.value['city_u']= select[2].value
     this.estado = false;
     if (this.estado) {
       this.newPass();
@@ -68,25 +74,7 @@ export class MyprofileComponent implements OnInit {
             break;
         }
       }, (error) => {
-        let srv_error = error.error;
-        switch (srv_error['status']) {
-          case 'exception':
-            alert('Exception');
-            console.log(srv_error['error']);
-            break
-          case 'sqlalchemy get_by':
-            alert('Sqlalchemy Exception');
-            console.log(srv_error['ex']);
-            break;
-          case 'postgres_tool get_by':
-            alert('Postgresql Exception');
-            console.log(srv_error['ex']);
-            break;
-          default:
-            alert('Debe ingresar todos los datos');
-            console.log(srv_error['ex']);
-            break;
-        }
+        this.alertsService.alertSigninExtra(error);
       })
     }
   }

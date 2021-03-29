@@ -1,7 +1,7 @@
 <div class="cont-body">
   <div class="container">
     <div class="row row-ne">
-      <div class="container">
+      <div class="container" *ngIf="!(auth.isLoggedIn() | async)">
         <div class="info-edit">
           <h4 class="edit">Complete su perfil</h4>
           <p>Asi podremos autocompletar informacion al construir sus actas.</p>
@@ -45,7 +45,7 @@
             <div class="row row-ne seco">
               <i class="material-icons left blue-sac ban">flag</i>
               <div class="input-field col s5 howa">
-                <select formControlName="regional_u">
+                <select id="feedingHay" >
                   <option value="" disabled selected>Seleccion su regional</option>
                   <option value="Quindio">Quindio</option>
                 </select>
@@ -55,7 +55,7 @@
               <div class="input-field col s5 howa">
                 <select formControlName="center_u">
                   <option value="" disabled selected>Seleccion su centro</option>
-                  <option value="Centro de comercio y tu rismo">Centro de comercio</option>
+                  <option value="Centro de comercio y turismo">Centro de comercio</option>
                 </select>
                 <label>Centro</label>
               </div>
@@ -70,7 +70,9 @@
             </div>
             <div class="center-align boton1">
               <button class="waves-effect waves-light btn orange-sac" type="submit">Guardar</button>
+              <button id="menu-button" routerLink="/login"><i class="material-icons">cancel</i><br>Cancelar</button>
             </div>
+            
           </form>
         </div>
       </div>

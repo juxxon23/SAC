@@ -129,3 +129,12 @@ p {
 	border-bottom: 1px solid #001935;	
 	box-shadow: 0 1px 0 0 #001935;	
 }
+
+#menu-button {
+	background-color:  #e3e6eb;
+	text-align: center;
+    float: right;
+    text-decoration: none;
+    margin: -1.5% 1%;
+	border: 0px;
+}

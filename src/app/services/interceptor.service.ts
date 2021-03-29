@@ -3,17 +3,19 @@ import { HttpInterceptor,HttpRequest, HttpHandler, HttpEvent } from '@angular/co
 import { SpinnerService } from './spinner.service'
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators'
+import { UserAlertsService } from './user-alerts.service';
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private spinnerService: SpinnerService) { }
+  constructor(
+    private spinnerService: SpinnerService,
+    private alertService: UserAlertsService
+    ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.spinnerService.llamarSpinner();
-    return next.handle(req).pipe(
-      finalize(() => this.spinnerService.detenerSpinner())
-    )
+    //this.spinnerService.llamarSpinner();
+    return next.handle(req)
   }
 }

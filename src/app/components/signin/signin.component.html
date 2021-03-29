@@ -7,7 +7,8 @@
           <p class="int-bainf">Por favor ingrese sus datos básicos.</p>
         </div>
         <div>
-          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()" >
+          <form class="col s12 contain-signin" [formGroup]="signin" (ngSubmit)="onSubmit()">
+            <button id="menu-button" routerLink="/login"><i class="material-icons">cancel</i><br>Cancelar</button>
             <div class="row center">
               <div class="input-field col s6">
                 <i class="material-icons prefix blue-sac">assignment</i>
@@ -40,11 +41,14 @@
               <button class="waves-effect waves-light btn gray-sac" type="submit" [disabled]="signin.invalid">
                 Guardar
               </button>
-              <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="signin.invalid" (click)="editProfile()">
-                  Completar Perfil
+              <button class="waves-effect waves-light btn orange-sac" type="submit" [disabled]="signin.invalid"
+                (click)="editProfile()">
+                Completar Perfil
               </button>
             </div>
+          
           </form>
+
         </div>
       </div>
     </div>
