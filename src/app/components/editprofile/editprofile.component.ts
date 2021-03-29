@@ -48,7 +48,7 @@ export class EditprofileComponent implements OnInit {
       regional_u: [''],
       center_u: [''],
       bonding_type: [''],
-      document_u: [localStorage.getItem('currentUser')],
+      id_u: [this.auth.getCurrentUser()],
     });
   }
 

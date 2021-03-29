@@ -43,7 +43,7 @@ export class MyprofileComponent implements OnInit {
       center_u: [''],
       bonding_type: [''],
       city_u: [''],
-      document_u: [this.auth.getCurrentUser()]
+      id_u: [this.auth.getCurrentUser()]
     })
   }
 
