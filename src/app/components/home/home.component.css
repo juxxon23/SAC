@@ -1,5 +1,6 @@
 .body-cont {
     background-color: #e3e6eb;
+    height: auto;
 }
 .row-no {
     margin: 0;
@@ -62,11 +63,11 @@ h3 {
 }
 
 .buscador {
-    padding: 0 0 0 33%;
+    padding: 0 0 0 10%;
 }
 
 .cajon2 {
-    text-align: center;
+    padding: 0 0 0 30%;
 }
 
 .cajon3 {
@@ -102,4 +103,8 @@ a {
 
 .blue-sac {
 	color: #001935;	
+}
+
+.sel {
+    width: 200px;
 }

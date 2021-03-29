@@ -22,7 +22,6 @@ export class HomeGuard implements CanActivate {
           if (login) {
             resolve(true);
           } else {
-            console.log('user is nor logged in');
             this.router.navigate(['/login']);
             resolve(false);
           }
