@@ -37,4 +37,32 @@
     height: auto;
 }
 
+#modal1 {
+    background-color: rgb(240, 242, 245);
+}
+
+.button-create-modal {
+    padding: 1% 2%;
+    background-color: rgb(240, 242, 245);
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+	color: #fc7323;
+}
+/* label underline focus color */
+.input-field input:focus {
+	border-bottom: 1px solid #fc7323;
+	box-shadow: 0 1px 0 0 #fc7323;
+}
+/* label focus color */
+.input-field input:focus + label {
+	color: #fc7323;
+}
+/* valid color */
+.input-field input.valid {
+	border-bottom: 1px solid #001935;	
+	box-shadow: 0 1px 0 0 #001935;	
+}
+
 

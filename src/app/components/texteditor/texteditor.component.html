@@ -2,7 +2,7 @@
   <div class="menu-doc col s2">
     <ul class="row">
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
-          (click)="createDoc()">Crear</button></li>
+          (click)="openMod()">Crear</button></li>
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
           (click)="saveDoc()">Guardar</button></li>
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
@@ -24,5 +24,28 @@
     table_resize_bars: false,
     table_toolbar: 'tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol'
   }" (onSelectionChange)="editorContent($event)" id="text-editor"></editor>
+  </div>
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <form [formGroup]="createAct" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">description</i>
+            <input type="text" class="validate" formControlName="description" required/>
+            <label for="name_u">Descripcion del acta</label>
+          </div>
+          <div class="input-field col s4">
+            <select formControlName="format_id">
+              <option value="" disabled selected>Seleccion el formato</option>
+              <option value="1">GD-F007-V2</option>
+              <option value="2">GD-F007-V3</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer button-create-modal">
+          <button class="modal-action modal-close btn waves-effect waves-light orange-sac" type="submit" [disabled]="createAct.invalid">Crear</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
