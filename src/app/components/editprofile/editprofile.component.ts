@@ -53,7 +53,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   onSubmit() {
-    var select = document.getElementsByTagName("select");
+    let select = document.getElementsByTagName("select");
     this.editprofile.value['regional_u']= select[0].value
     this.editprofile.value['center_u']= select[1].value
     this.editprofile.value['city_u']= select[2].value
