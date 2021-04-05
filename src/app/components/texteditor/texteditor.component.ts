@@ -6,6 +6,7 @@ import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentToolService } from 'src/app/services/document-tool.service';
 import { Routes } from 'src/app/constant/routes';
+import { ImagesToolService } from 'src/app/services/images-tool.service';
 
 declare var tinymce: any;
 declare var $: any;
@@ -28,12 +29,16 @@ export class TexteditorComponent implements OnInit {
     format_id: [''],
     id_u: [this.auth.getCurrentUser()],
   });
+  uploadImg = this.fb.group({
+    imgFile: ['']
+  });
 
   constructor(
     private rs: HttpToolService,
     public auth: AuthService,
     private dt: DocumentToolService,
     private fb: FormBuilder,
+    private ima: ImagesToolService
   ) { }
 
   ngOnInit(): void {
@@ -42,8 +47,38 @@ export class TexteditorComponent implements OnInit {
     this.verifyEdit();
   }
 
+  uploadImage() {
+    let upld: any = this.uploadImg.value['imgFile'].nativeElement;
+    console.log(upld.files);
+  }
+
+  getImg(): any {
+    let framesColl = document.getElementsByTagName('iframe');
+    let framDoc = framesColl[0].contentDocument;
+    let imgs: any = framDoc.getElementsByTagName('img');
+    return imgs;
+  }
+
+  getImgURI(): any {
+    let imgs: any = this.getImg();
+    let imgurl: any = {
+      'b64': [],
+      'static': []
+    };
+    for (let i = 0; i < imgs.length; i++) {
+      imgurl['static'].push(imgs[i].src);
+      imgurl['b64'].push(this.ima.getBase64Image(imgs[i]));   
+    }
+    return imgurl;
+  }
 
   exportActDocx() {
+    /*let imgs: any = this.getImgURI();
+    let imgsExport: any = this.getImg();
+    for (let i = 0; i < imgsExport.length; i++) {
+      imgsExport[i].src = imgs['b64'][i];
+      console.log(imgsExport[i]);
+    }*/
     let out: any = tinymce.activeEditor.getContent();
     let nameAct: string = 'Acta-' + this.auth.getCurrentAct();
     this.Export2Word(out, nameAct);
