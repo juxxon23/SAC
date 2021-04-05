@@ -9,7 +9,8 @@
     <li>
         <ul class="collapsible collapsible-accordion">
             <li>
-                <a class="collapsible-header waves-effect"><i class="material-icons">contact_page</i>Contacto TEAM-DEV</a>
+                <a class="collapsible-header waves-effect"><i class="material-icons">contact_page</i>Contacto
+                    TEAM-DEV</a>
                 <div class="collapsible-body">
                     <ul>
                         <li>
@@ -23,5 +24,34 @@
         </ul>
     </li>
 </ul>
-<a href="#" data-activates="slide-out" class="button-collapse" id="menu-button"><i class="material-icons"
-        *ngIf="auth.isLoggedIn() | async">menu</i></a>
+<a href="#" data-activates="slide-out" class="button-collapse menu-button">
+    <i class="material-icons" *ngIf="auth.isLoggedIn() | async">menu</i></a>
+<button (click)="showNotifications()" class="menu-button blue-sac" id="but">
+    <i class="material-icons" *ngIf="auth.isLoggedIn() | async">notifications</i>
+</button>
+<div *ngIf="not" class="ul-not">
+    <table>
+        <tr>
+            <th class="center-r gray-col" *ngFor="let column of header_list">
+                {{column}}
+            </th>
+        </tr>
+        <tr *ngFor="let doc of rows; index as i">
+            <td class="center-r">{{doc["id_a"]}}</td>
+            <td class="center-r">{{doc["document_u"]}}</td>
+            <td>
+                <div class="down-b">
+                    <button class="down-btn btn waves-effect waves-light blue-sac" (click)="declineReq(doc, i)">
+                        <span class="material-icons">
+                            dangerous
+                        </span>
+                    </button>
+                    <button class="down-btn btn waves-effect waves-light orange-sac" (click)="acceptReq(doc, i)">
+                        <span class="material-icons">
+                            check_circle
+                        </span>
+                    </button>
+                </div>
+            </td>
+    </table>
+</div>

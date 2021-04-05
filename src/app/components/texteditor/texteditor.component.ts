@@ -141,7 +141,8 @@ export class TexteditorComponent implements OnInit {
     let id_acta = this.auth.getCurrentAct();
     let data_doc = {
       'id_a': id_acta,
-      'content': content
+      'content': content,
+      'html_content': tinymce.activeEditor.getContent()
     }
     this.rs.putRequest(this.url_doc, data_doc).subscribe((data: any) => {
       console.log(data);

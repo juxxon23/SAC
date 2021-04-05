@@ -38,12 +38,16 @@ export class HttpToolService {
     return this.http.post(url, dataEx, config);
   }
 
-	deleteData(url:string, dataEx?:any) {
-		return this.http.delete(url, {
-			params: {
-				id: dataEx
-			}
-		});
+	deleteRequest(url:string, i?:any) {
+    const config: any = {
+      responseType: 'json',
+    };
+    let header = new HttpHeaders();
+    if (i) {
+      header = header.set('i_req', i);
+    }
+    config.headers = header;
+		return this.http.delete(url, config);
 	}
 
   putRequest(url: string, dataEx: any , token ?: string){

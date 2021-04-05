@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
 
   url_doc: string = Routes.url_base_local + Routes.url_document;
   url_search: string = Routes.url_base_local + Routes.url_search;
-  header_list = ['Acta No.', 'Creador', 'Formato', 'Opciones'];
+  url_reqEdit: string = Routes.url_base_local + Routes.url_req_edit;
+  header_list = ['Acta No.', 'Creador', 'Descripcion', 'Formato', 'Editar', 'Descargar'];
   rows = [];
   table_state: boolean = false;
   options = {}
@@ -36,14 +37,64 @@ export class HomeComponent implements OnInit {
     $('select').material_select();
     this.filterOpt = this.fb.group({
       dataOpt: [''],
-      opt: ['']
+      opt: [''],
+      currUser: [this.auth.getCurrentUser()]
     });
+  }
+
+  exportActDocx(doc: any) {
+    let us: string = this.auth.getCurrentUser();
+    let ida: string = doc['id_a'].toString();
+    this.rs.getRequest(this.url_search, us, ida).subscribe(
+      (data: any) => {
+        let out: any = data['h_temp']
+        let nameAct: string = 'Acta-' + ida;
+        this.Export2Word(out, nameAct);
+      });
+  }
+
+  Export2Word(element, filename = '') {
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml + element + postHtml;
+    var blob = new Blob(['\ufeff', html], {
+      type: 'application/msword'
+    });
+    // Specify link url
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    // Specify file name
+    filename = filename ? filename + '.docx' : 'Acta.docx';
+    // Create download link element
+    var downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+    if (navigator.msSaveOrOpenBlob) {
+      navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+      // Create a link to the file
+      downloadLink.href = url;
+      // Setting the file name
+      downloadLink.download = filename;
+      //triggering the function
+      downloadLink.click();
+    }
+    document.body.removeChild(downloadLink);
+  }
+
+  convertOptions(options: any) {
+    for (let i = 0; i < options.length; i++) {
+      if (options[i]['edit']) {
+        this.options[i] = 'edit';
+      } else {
+        this.options[i] = 'schedule_send';
+      }
+    }
   }
 
   actBrowser() {
     this.getSelect();
     this.rs.postRequest(this.url_search, this.filterOpt.value).subscribe((data: any) => {
       this.rows = data['u'];
+      this.convertOptions(data['u']);
       this.table_state = !this.table_state;
     });
   }
@@ -71,11 +122,22 @@ export class HomeComponent implements OnInit {
   actBy(doc: any) {
     let id_a: string = doc['id_a'].toString();
     let id_u: any = this.auth.getCurrentUser();
-    this.rs.getRequest(this.url_search, id_u, id_a).subscribe(
-      (data: any) => {
-        this.auth.setCurrentAct(id_a)
-        this.router.navigate(['/texteditor'], { relativeTo: this.route });
+    let edit: boolean = doc['edit'];
+    if (edit) {
+      this.rs.getRequest(this.url_search, id_u, id_a).subscribe(
+        (data: any) => {
+          this.auth.setCurrentAct(id_a)
+          this.router.navigate(['/texteditor'], { relativeTo: this.route });
+        });
+    } else {
+      let reqE: any = {
+        'id_u': this.auth.getCurrentUser(),
+        'id_a': id_a
+      }
+      this.rs.postRequest(this.url_reqEdit, reqE).subscribe((data: any) => {
+        console.log(data);
       });
+    }
   }
 }
 

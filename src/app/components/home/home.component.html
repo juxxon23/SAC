@@ -7,7 +7,7 @@
                         <div class="input-field col s8">
                             <i class="material-icons prefix blue-sac">textsms</i>
                             <input type="text" id="dataOpt" formControlName="dataOpt">
-                            <label for="dataOpt">Autocomplete</label>
+                            <label for="dataOpt">Buscar</label>
                         </div>
                         <div class="input-field col s4">
                             <select formControlName="opt">
@@ -19,10 +19,9 @@
                         </div>
                     </div>
                     <div class="cajon2 ">
-                        <button type="submit"
-                            class="menu-button-doc btn waves-effect waves-light orange-sac" (click)="actBrowser()">Buscar</button>
-                        <button class="menu-button-doc btn waves-effect waves-light orange-sac"
-                            (click)="searchAct()">Crear
+                        <button type="submit" class="menu-button-doc btn waves-effect waves-light orange-sac"
+                            (click)="actBrowser()">Buscar</button>
+                        <button class="menu-button-doc btn waves-effect waves-light orange-sac">Crear
                             Acta</button>
                     </div>
                 </form>
@@ -36,11 +35,29 @@
                         <tr *ngFor="let doc of rows; index as i">
                             <td class="center-r">{{doc["id_a"]}}</td>
                             <td class="center-r">{{doc["id_u"]}}</td>
+                            <td class="center-r">{{doc["description"]}}</td>
                             <td class="center-r">{{doc["format_id"]}}</td>
-                            <td class="center-r"><button
-                                    class="menu-button-editor btn waves-effect waves-light orange-sac"
-                                    (click)="actBy(doc)">Editar</button>
-                            <td></td>
+                            <td class="center-r">
+                                <button class="btn waves-effect waves-light orange-sac" (click)="actBy(doc)"><span
+                                        class="material-icons menu-button-editor">
+                                        {{options[i]}}
+                                    </span>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="down-b">
+                                    <button class="down-btn btn waves-effect waves-light orange-sac" (click)="exportActDocx(doc)">
+                                        <span class="material-icons">
+                                            article
+                                        </span>
+                                    </button>
+                                    <button class="down-btn btn waves-effect waves-light orange-sac">
+                                        <span class="material-icons">
+                                            picture_as_pdf
+                                        </span>
+                                    </button>
+                                </div>
+                            </td>
                     </table>
                 </div>
             </div>
