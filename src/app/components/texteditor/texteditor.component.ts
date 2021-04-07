@@ -21,9 +21,12 @@ export class TexteditorComponent implements OnInit {
   myEditor: any = '';
   url_doc: string = Routes.url_base_local + Routes.url_document;
   url_search: string = Routes.url_base_local + Routes.url_search;
+  url_up: string = Routes.url_base_local + Routes.url_upload;
   header_list = ['index', '_id', 'document_u', 'get_doc'];
   rows = [];
   table_state: boolean = false;
+  filUser: any;
+  upff: boolean = false;
   createAct = this.fb.group({
     description: ['', Validators.required],
     format_id: [''],
@@ -42,15 +45,45 @@ export class TexteditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let ca: any = this.auth.getTempAct();
+    if (ca != null) {
+      this.auth.setCurrentAct(ca);
+      this.auth.deleteTempAct();
+    }
     $('select').material_select();
     $('.modal').modal();
     this.verifyEdit();
   }
 
-  uploadImage() {
-    let upld: any = this.uploadImg.value['imgFile'].nativeElement;
-    console.log(upld.files);
+  showUp() {
+    this.upff = !this.upff;
   }
+
+  uploadImage() {
+    this.rs.postRequest(this.url_up, this.filUser, this.auth.getCurrentUser(), this.auth.getCurrentAct()).subscribe((data: any) => {
+      console.log('Success');
+      this.showUp();
+    });
+  }
+
+  getFiles(event) {
+    let fileUser: File = event.target.files[0];
+    let mime: string = this.getMimeType(fileUser.name);
+    const blobUser = new Blob([fileUser], { type: mime });
+    this.filUser = blobUser;
+
+  }
+
+  private getMimeType(filename: string): string {
+    if (filename.indexOf('.docx') !== -1) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if (filename.indexOf('.doc') !== -1) return 'application/msword';
+    if (filename.indexOf('.pdf') !== -1) return 'application/pdf';
+    if (filename.indexOf('.png') !== -1) return 'image/png';
+    if (filename.indexOf('.jpeg') !== -1) return "image/jpeg";
+    if (filename.indexOf('.jpg') !== -1) return "image/jpg";
+    return 'text/plain';
+  }
+
 
   getImg(): any {
     let framesColl = document.getElementsByTagName('iframe');
@@ -67,7 +100,7 @@ export class TexteditorComponent implements OnInit {
     };
     for (let i = 0; i < imgs.length; i++) {
       imgurl['static'].push(imgs[i].src);
-      imgurl['b64'].push(this.ima.getBase64Image(imgs[i]));   
+      imgurl['b64'].push(this.ima.getBase64Image(imgs[i]));
     }
     return imgurl;
   }
@@ -89,7 +122,7 @@ export class TexteditorComponent implements OnInit {
     var postHtml = "</body></html>";
     var html = preHtml + element + postHtml;
     var blob = new Blob(['\ufeff', html], {
-      type: 'application/msword'
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     });
     // Specify link url
     var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
@@ -134,7 +167,7 @@ export class TexteditorComponent implements OnInit {
   }
 
   insertHtml(htmlString) {
-    tinymce.execCommand('mceInsertContent', false, htmlString);
+    tinymce.activeEditor.setContent(htmlString);
   }
 
   onSubmit() {

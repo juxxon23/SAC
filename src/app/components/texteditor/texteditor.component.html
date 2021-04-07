@@ -7,21 +7,20 @@
           (click)="saveDoc()">Guardar</button></li>
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
           (click)="exportActDocx()">Exportar Docx</button></li>
-      <!--
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
-          (click)="uploadImage()">Subir imagen</button></li>
-      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
-          (click)="getImgURI()">obtener uri</button></li>
-      <li>
+          (click)="showUp()">Subir anexos</button></li>
+      <li *ngIf="upff">
         <form [formGroup]="uploadImg" class="col s12">
           <div class="row">
-            <div class="input-field col s8">
-              <input type="file" formControlName="imgFile">
+            <div class="input-field col s8" >
+              <input type="file" formControlName="imgFile" name="imgFile" id=imgFile (change)="getFiles($event)">
+              <button (click)="uploadImage()">Enviar</button>
             </div>
           </div>
         </form>
       </li>
-      -->
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
+          (click)="getImgURI()">obtener uri</button></li>
     </ul>
 
   </div>

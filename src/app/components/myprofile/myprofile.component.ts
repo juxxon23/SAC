@@ -33,6 +33,13 @@ export class MyprofileComponent implements OnInit {
   estado: boolean = false;
 
   ngOnInit(): void {
+    this.auth.isAct().subscribe((data) => {
+      if (data) {
+        if (this.router.url != '/texteditor') {
+          this.auth.deleteCurrentAct();
+        }
+      }
+    });
     $('select').material_select();
     this.myprofile = this.fb.group({
       password_u: [''],
@@ -44,7 +51,8 @@ export class MyprofileComponent implements OnInit {
       bonding_type: [''],
       city_u: [''],
       id_u: [this.auth.getCurrentUser()]
-    })
+    });
+    
   }
 
   newPass() {

@@ -42,6 +42,10 @@
     background-color: rgb(240, 242, 245);
 }
 
+#imgFile {
+    width: 130px;
+}
+
 .button-create-modal {
     padding: 1% 2%;
     background-color: rgb(240, 242, 245);
