@@ -47,15 +47,6 @@ export class TexteditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    $(".button-collapse").sideNav({
-      menuWidth: 300, // Default is 300
-      edge: 'right', // Choose the horizontal origin);
-      closeOnClick: true, // Closes side-nav on <a> clicks
-    });
-    $('.collapsible').collapsible();
-  ) { }
-
-  ngOnInit(): void {
     let ca: any = this.auth.getTempAct();
     if (ca != null) {
       this.auth.setCurrentAct(ca);
@@ -64,10 +55,6 @@ export class TexteditorComponent implements OnInit {
     $('select').material_select();
     $('.modal').modal();
     this.verifyEdit();
-  }
-
-  logout() {
-    this.auth.logout();
   }
 
   showUp() {
