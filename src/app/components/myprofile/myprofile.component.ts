@@ -33,6 +33,7 @@ export class MyprofileComponent implements OnInit {
   estado: boolean = false;
 
   ngOnInit(): void {
+    this.getDataUser(this.auth.getCurrentUser());
     $('select').material_select();
     this.myprofile = this.fb.group({
       password_u: [''],
@@ -51,6 +52,19 @@ export class MyprofileComponent implements OnInit {
     this.estado = true;
   }
 
+  name: any
+  lastname: any
+  phone: any
+
+  getDataUser(user_id: string) {
+    this.rs.getRequest(this.url_myprofile,  user_id).subscribe((data:any) => {
+      this.dataEx = data;
+      this.name = this.dataEx['data'][0]
+      this.lastname = this.dataEx['data'][1]
+      this.phone = this.dataEx['data'][2]
+    })
+  }
+
   onSubmit() {
     var select = document.getElementsByTagName("select");
     this.myprofile.value['regional_u']= select[0].value
@@ -61,6 +75,15 @@ export class MyprofileComponent implements OnInit {
       this.newPass();
     } else {
       var form = this.myprofile.value;
+      console.log(form['name_u']);
+
+      if (form['name_u'] == "") {
+        this.myprofile.value['name_u']= this.name
+      } if (form['lastname_u'] == "") {
+          this.myprofile.value['lastname_u'] = this.lastname
+      } if (form['phone_u'] == "") {
+          this.myprofile.value['phone_u'] = this.phone
+      }
       this.rs.putRequest(this.url_myprofile, form).subscribe((data: any) => {
         this.dataEx = data;
         console.log(this.dataEx);
