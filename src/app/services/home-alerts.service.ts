@@ -27,7 +27,6 @@ export class HomeAlertsService {
 
   public AlertCreateActa(status) {
     let createActa = status;
-
     switch (createActa['status']) {
       case 'ok':
         M.toast('Acta creada exitosamente.', 4000)
