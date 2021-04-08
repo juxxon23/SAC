@@ -6,6 +6,7 @@ import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentToolService } from 'src/app/services/document-tool.service';
 import { Routes } from 'src/app/constant/routes';
+import { HomeAlertsService } from 'src/app/services/home-alerts.service'
 
 declare var tinymce: any;
 declare var $: any;
@@ -34,12 +35,23 @@ export class TexteditorComponent implements OnInit {
     public auth: AuthService,
     private dt: DocumentToolService,
     private fb: FormBuilder,
+    private alerts: HomeAlertsService
   ) { }
 
   ngOnInit(): void {
+    $(".button-collapse").sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'right', // Choose the horizontal origin);
+      closeOnClick: true, // Closes side-nav on <a> clicks
+    });
+    $('.collapsible').collapsible();
     $('select').material_select();
     $('.modal').modal();
     this.verifyEdit();
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
 
@@ -108,9 +120,14 @@ export class TexteditorComponent implements OnInit {
       this.rs.postRequest(this.url_doc, this.createAct.value).subscribe((data: any) => {
         this.insertHtml(data['format']['template']);
         this.auth.setCurrentAct(data['format']['id_acta']);
+        this.alerts.AlertCreateActa(data)
         if (data['format']['content']) {
           this.dt.setContentTable(data['format']['content']);
         }
+      }, (error) => {
+        console.log(error);
+
+        this.alerts.AlertCreateActa(error)
       });
     }
   }
@@ -146,6 +163,10 @@ export class TexteditorComponent implements OnInit {
     }
     this.rs.putRequest(this.url_doc, data_doc).subscribe((data: any) => {
       console.log(data);
+      this.alerts.AlertSaveActa(data)
+    }, (error) => {
+      console.log(error);
+      this.alerts.AlertSaveActa(error)
     });
   }
 }
