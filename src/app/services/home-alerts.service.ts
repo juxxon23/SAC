@@ -16,12 +16,14 @@ export class HomeAlertsService {
         break;
     }
 
-    switch (edit_request_error.error['status']) {
-      case 'error':
-        M.toast('Error en el envio de solicitud de edicion intente mas tarde.', 4000)
-      case 'exception':
-        M.toast('Excepcion.', 4000);
-        break;
+    if (edit_request_error.error != undefined) {
+      switch (edit_request_error.error['status']) {
+        case 'error':
+          M.toast('Error en el envio de solicitud de edicion intente mas tarde.', 4000)
+        case 'exception':
+          M.toast('Excepcion.', 4000);
+          break;
+      }
     }
   }
 
@@ -34,15 +36,17 @@ export class HomeAlertsService {
         break;
     }
 
-    switch (createActa.error['status']) {
-      case 'error':
-        M.toast('Error: a la hora de crear el acta intente mas tarde.', 4000)
-        break;
-      case 'exception':
-        M.toast('Excepcion.', 4000)
-        break;
-      default:
-        break;
+    if (createActa.error != undefined) {
+      switch (createActa.error['status']) {
+        case 'error':
+          M.toast('Error: a la hora de crear el acta intente mas tarde.', 4000)
+          break;
+        case 'exception':
+          M.toast('Excepcion.', 4000)
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -54,12 +58,12 @@ export class HomeAlertsService {
         break;
     }
 
-    switch (saveActa.error['status']) {
-      case 'validation_error':
-        M.toast('Error: no ha creado un acta.', 4000)
-        break;
-      default:
-        break;
+    if (saveActa.error['status']) {
+      switch (saveActa.error['status']) {
+        case 'validation_error':
+          M.toast('Error: no ha creado un acta.', 4000)
+          break;
+      }
     }
   }
 
@@ -71,17 +75,19 @@ export class HomeAlertsService {
         break;
     }
 
-    switch (searchActa.error['status']) {
-      case 'error':
-        M.toast('Error: el acta no existe o especifique su busqueda.', 4000)
-        break;
-    
-      case 'user':
-        M.toast('Error: el usuario no existe.', 4000)
-        break;
+    if (searchActa.error != undefined) {
+      switch (searchActa.error['status']) {
+        case 'error':
+          M.toast('Error: el acta no existe o especifique su busqueda.', 4000)
+          break;
 
-      case 'exception':
-        M.toast('No puede ingresar letras para buscar por No. Acta, Ingrese numeros.', 4000)
+        case 'user':
+          M.toast('Error: el usuario no existe.', 4000)
+          break;
+
+        case 'exception':
+          M.toast('No puede ingresar letras para buscar por No. Acta, Ingrese numeros.', 4000)
+      }
     }
   }
 }
