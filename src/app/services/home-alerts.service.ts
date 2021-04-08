@@ -49,6 +49,26 @@ export class HomeAlertsService {
     }
   }
 
+  public AlertUploadContent(status) {
+    let saveActa = status;
+    switch (saveActa['status']) {
+      case 'ok':
+        M.toast('El archivo ha sido guardado.', 4000)
+        break;
+    }
+
+    if (saveActa.error != undefined) {
+      if (saveActa.error['status']) {
+        switch (saveActa.error['status']) {
+          case 'Exception':
+            M.toast('Ha ocurrido un error.', 4000)
+            break;
+        }
+      }
+    }
+  }
+
+
   public AlertSaveActa(status) {
     let saveActa = status;
     switch (saveActa['status']) {
@@ -57,11 +77,13 @@ export class HomeAlertsService {
         break;
     }
 
-    if (saveActa.error['status']) {
-      switch (saveActa.error['status']) {
-        case 'validation_error':
-          M.toast('Error: no ha creado un acta.', 4000)
-          break;
+    if (saveActa.error != undefined) {
+      if (saveActa.error['status']) {
+        switch (saveActa.error['status']) {
+          case 'validation_error':
+            M.toast('Error: no ha creado un acta.', 4000)
+            break;
+        }
       }
     }
   }

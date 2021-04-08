@@ -58,31 +58,34 @@ export class DocumentToolService {
   }
 
   setContentTable(content: any) {
-    let tab: any, r: any, l: any, lcc: number, lc: number;
+    let tab: any, r: any, l: any, lcc: number, lc: number, e: any, el: number;
+    let liElem: string = '<ol style="list-style-type:decimal;"><li><span style="margin-right: 1.21em;" class="topic" data-mce-style="margin-right: 1.21em;">Hola amigos</span></li></ol>';
     tab = this.setCurrentTable();
     for (let i = 0; i < tab.length; i++) {
       r = tab[i].rows;
       for (let j = 0; j < r.length; j++) {
-        l = r[j].cells;
-        if (l.length == 1) {
-          lcc = l[0].children.length;
-          // Si solo tiene un elemento hijo
-          if (lcc == 0 || lcc == 1) {
-            l[0].innerText = content[i][j];
-          } else {
-            for (let m = 0; m < lcc; m++) {
-              l[0].children[m].innerText = content[i][j][m];
-            }
-          }
-        } else {
-          for (let k = 0; k < l.length; k++) {
-            lc = l[k].children.length;
+        if (j < 4 || j > 5) {
+          l = r[j].cells;
+          if (l.length == 1) {
+            lcc = l[0].children.length;
             // Si solo tiene un elemento hijo
-            if (lc == 1) {
-              l[k].children[0].innerText = content[i][j][k];
+            if (lcc == 0 || lcc == 1) {
+              l[0].innerText = content[i][j];
             } else {
-              for (let m = 0; m < lc; m++) {
-                l[k].children[m].innerText = content[i][j][k][m]
+              for (let m = 0; m < lcc; m++) {
+                l[0].children[m].innerText = content[i][j][m];
+              }
+            }
+          } else {
+            for (let k = 0; k < l.length; k++) {
+              lc = l[k].children.length;
+              // Si solo tiene un elemento hijo
+              if (lc == 1) {
+                l[k].children[0].innerText = content[i][j][k];
+              } else {
+                for (let m = 0; m < lc; m++) {
+                  l[k].children[m].innerText = content[i][j][k][m]
+                }
               }
             }
           }
@@ -175,7 +178,7 @@ export class DocumentToolService {
     let opt: string = "assis";
     lisass = this.currContent['footer']['list_asis'];
     l = lisass.length;
-    colTable = this.addAssistant(l);
+    colTable = this.addAssistant();
     // Insertar filas a lista de asistencia
     e = this.framDoc.getElementsByTagName('tr');
     el = e.length;
@@ -185,18 +188,8 @@ export class DocumentToolService {
     dd[0].remove();
   }
 
-  addAssistant(n: number) {
-    let newAssistant: string = '';
-    if (n == 1) {
-      newAssistant = '<tr class="instru"><td class="num-asis" style="text-align: center;"></td><td colspan="2"><span class="full-name" style="text-indent: 0.34em;"></span></td><td><span class="id-instru" style="margin-left: 0.58em;"></span></td><td class="bonding-type" style="text-align: center;"></td><td class="bonding-type" style="text-align: center;"></td><td class="company-depen" colspan="2"></td><td colspan="2"><span class="mail-instru" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext" style="text-indent: 0.01em;"></span></td><td><br></td></tr>';;
-      return newAssistant;
-    }
-    else {
-      for (let i = 0; i < n; i++) {
-        newAssistant += `<tr class="instru"><td class="num-asis${i}" style="text-align: center;"></td><td colspan="2"><span class="full-name${i}" style="text-indent: 0.34em;"></span></td><td><span class="id-instru${i}" style="margin-left: 0.58em;"></span></td><td class="bonding-type${i}" style="text-align: center;"></td><td class="bonding-type${i}" style="text-align: center;"></td><td class="company-depen${i}" colspan="2"></td><td colspan="2"><span class="mail-instru${i}" style="text-indent: 0.60em;"></span></td><td style="text-align: center;"><span class="phone-ext${i}" style="text-indent: 0.01em;"></span></td><td><br></td></tr>`;
-      }
-      return newAssistant;
-    }
+  addAssistant() {
+    return '<tr><td style="text-align:center;"><span class="num-asis">1</span></td><td colspan="2"><span style="margin-left:2.93em;"><br></span></td><td><span style="margin-left:0.45em" class="full-name"><br></span></td><td><span style="margin-left:0.45em" class="id-instru"><br></span></td><td style="text-align:center;"><span class="bonding-type"><br></span></td><td style="text-align:center;"><span class="bonding-type"><br></span></td><td style="text-align:center;"><span class="bonding-type"><br></span></td><td><span style="margin-left:0.45em;" class="company-depen"><br></span></td><td><span style="margin-left:0.45em" class="mail-instru"><br></span></td><td><span style="margin-left:0.46em" class="phone-ext"><br></span></td><td style="text-align:center;"><span><br></span></td><td><span style="margin-left:0.48em;"><br></span></td></tr>';
   }
 
   accessContent(sectionKeys: any, content: any, opt: string = "default") {

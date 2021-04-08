@@ -63,9 +63,10 @@ export class TexteditorComponent implements OnInit {
 
   uploadImage() {
     this.rs.postRequest(this.url_up, this.filUser, this.auth.getCurrentUser(), this.auth.getCurrentAct()).subscribe((data: any) => {
-      console.log('Success');
+      this.alerts.AlertUploadContent(data);
       this.showUp();
-    });
+    }, (error) => {
+      this.alerts.AlertUploadContent(error)});
   }
 
   getFiles(event) {
