@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Routes } from 'src/app/constant/routes';
+import { HomeAlertsService } from 'src/app/services/home-alerts.service'
 
 
 declare var $: any;
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     public auth: AuthService,
     private rs: HttpToolService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alerts: HomeAlertsService
   ) { }
 
   url_doc: string = Routes.url_base_local + Routes.url_document;
@@ -103,6 +105,9 @@ export class HomeComponent implements OnInit {
       this.rows = data['u'];
       this.convertOptions(data['u']);
       this.table_state = !this.table_state;
+      this.alerts.AlertSearchActa(data)
+    }, (error) => {
+      this.alerts.AlertSearchActa(error)
     });
   }
 
@@ -142,7 +147,9 @@ export class HomeComponent implements OnInit {
         'id_a': id_a
       }
       this.rs.postRequest(this.url_reqEdit, reqE).subscribe((data: any) => {
-        console.log(data);
+        this.alerts.AlertEditRequest(data)
+      }, (error) => {
+        this.alerts.AlertEditRequest(error)
       });
     }
   }

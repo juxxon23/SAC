@@ -6,6 +6,7 @@ import { HttpToolService } from 'src/app/services/http-tool.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentToolService } from 'src/app/services/document-tool.service';
 import { Routes } from 'src/app/constant/routes';
+import { HomeAlertsService } from 'src/app/services/home-alerts.service'
 import { ImagesToolService } from 'src/app/services/images-tool.service';
 
 declare var tinymce: any;
@@ -41,7 +42,17 @@ export class TexteditorComponent implements OnInit {
     public auth: AuthService,
     private dt: DocumentToolService,
     private fb: FormBuilder,
+    private alerts: HomeAlertsService,
     private ima: ImagesToolService
+  ) { }
+
+  ngOnInit(): void {
+    $(".button-collapse").sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'right', // Choose the horizontal origin);
+      closeOnClick: true, // Closes side-nav on <a> clicks
+    });
+    $('.collapsible').collapsible();
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +64,10 @@ export class TexteditorComponent implements OnInit {
     $('select').material_select();
     $('.modal').modal();
     this.verifyEdit();
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
   showUp() {
@@ -104,6 +119,7 @@ export class TexteditorComponent implements OnInit {
     }
     return imgurl;
   }
+
 
   exportActDocx() {
     /*let imgs: any = this.getImgURI();
@@ -176,9 +192,14 @@ export class TexteditorComponent implements OnInit {
       this.rs.postRequest(this.url_doc, this.createAct.value).subscribe((data: any) => {
         this.insertHtml(data['format']['template']);
         this.auth.setCurrentAct(data['format']['id_acta']);
+        this.alerts.AlertCreateActa(data)
         if (data['format']['content']) {
           this.dt.setContentTable(data['format']['content']);
         }
+      }, (error) => {
+        console.log(error);
+
+        this.alerts.AlertCreateActa(error)
       });
     }
   }
@@ -214,6 +235,10 @@ export class TexteditorComponent implements OnInit {
     }
     this.rs.putRequest(this.url_doc, data_doc).subscribe((data: any) => {
       console.log(data);
+      this.alerts.AlertSaveActa(data)
+    }, (error) => {
+      console.log(error);
+      this.alerts.AlertSaveActa(error)
     });
   }
 }
