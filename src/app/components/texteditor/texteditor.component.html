@@ -7,6 +7,24 @@
           (click)="saveDoc()">Guardar</button></li>
       <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
           (click)="exportActDocx()">Exportar Docx</button></li>
+      <li class="col s12"><button class="menu-button-doc btn waves-effect waves-light orange-sac"
+          (click)="showUp()">Anexos</button></li>
+      <li *ngIf="upff">
+        <form [formGroup]="uploadImg" class="col s12">
+          <div class="row">
+            <div class="file-field input-field">
+              <div class="btn blue-sac inp-fi">
+                <span>Cargar</span>
+                <input type="file" formControlName="imgFile" name="imgFile" id=imgFile (change)="getFiles($event)">
+              </div>
+              <div class="file-path-wrapper inp-fi">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+            <button class="menu-button-doc btn waves-effect waves-light blue-sac" (click)="uploadImage()">Enviar</button>
+          </div>
+        </form>
+      </li>
     </ul>
 
   </div>
@@ -16,11 +34,11 @@
     menubar: false,
     plugins: [
       'print preview anchor',
-      'fullscreen table',
+      'fullscreen table image',
       'paste help'
     ],
     toolbar:
-      'undo redo | bold italic | help',
+      'undo redo | bold italic | help | image',
     table_resize_bars: false,
     table_toolbar: 'tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol'
   }" (onSelectionChange)="editorContent($event)" id="text-editor"></editor>
@@ -31,7 +49,7 @@
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">description</i>
-            <input type="text" class="validate" formControlName="description" required/>
+            <input type="text" class="validate" formControlName="description" required />
             <label for="name_u">Descripcion del acta</label>
           </div>
           <div class="input-field col s4">
@@ -43,7 +61,8 @@
           </div>
         </div>
         <div class="modal-footer button-create-modal">
-          <button class="modal-action modal-close btn waves-effect waves-light orange-sac" type="submit" [disabled]="createAct.invalid">Crear</button>
+          <button class="modal-action modal-close btn waves-effect waves-light orange-sac" type="submit"
+            [disabled]="createAct.invalid">Crear</button>
         </div>
       </form>
     </div>

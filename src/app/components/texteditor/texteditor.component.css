@@ -31,6 +31,17 @@
 .blue-sac {
 	background-color: #001935;
 }
+
+.gray-sac {
+    background-color: rgb(240, 242, 245);
+    color: #001935;
+}
+
+.inp-fi {
+    margin: 0;
+    padding: 1%;
+}
+
 #text-editor {
     margin: 0 1%;
     width: auto;
@@ -41,8 +52,12 @@
     background-color: rgb(240, 242, 245);
 }
 
+#imgFile {
+    width: 130px;
+}
+
 .button-create-modal {
-    padding: 1% 2%;
+    padding: 1% 6% 4% 6%;
     background-color: rgb(240, 242, 245);
 }
 
