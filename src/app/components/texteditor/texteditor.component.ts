@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DocumentToolService } from 'src/app/services/document-tool.service';
 import { Routes } from 'src/app/constant/routes';
 import { HomeAlertsService } from 'src/app/services/home-alerts.service'
+import { ImagesToolService } from 'src/app/services/images-tool.service';
 
 declare var tinymce: any;
 declare var $: any;
@@ -21,13 +22,19 @@ export class TexteditorComponent implements OnInit {
   myEditor: any = '';
   url_doc: string = Routes.url_base_local + Routes.url_document;
   url_search: string = Routes.url_base_local + Routes.url_search;
+  url_up: string = Routes.url_base_local + Routes.url_upload;
   header_list = ['index', '_id', 'document_u', 'get_doc'];
   rows = [];
   table_state: boolean = false;
+  filUser: any;
+  upff: boolean = false;
   createAct = this.fb.group({
     description: ['', Validators.required],
     format_id: [''],
     id_u: [this.auth.getCurrentUser()],
+  });
+  uploadImg = this.fb.group({
+    imgFile: ['']
   });
 
   constructor(
@@ -35,7 +42,8 @@ export class TexteditorComponent implements OnInit {
     public auth: AuthService,
     private dt: DocumentToolService,
     private fb: FormBuilder,
-    private alerts: HomeAlertsService
+    private alerts: HomeAlertsService,
+    private ima: ImagesToolService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +53,14 @@ export class TexteditorComponent implements OnInit {
       closeOnClick: true, // Closes side-nav on <a> clicks
     });
     $('.collapsible').collapsible();
+  ) { }
+
+  ngOnInit(): void {
+    let ca: any = this.auth.getTempAct();
+    if (ca != null) {
+      this.auth.setCurrentAct(ca);
+      this.auth.deleteTempAct();
+    }
     $('select').material_select();
     $('.modal').modal();
     this.verifyEdit();
@@ -54,8 +70,64 @@ export class TexteditorComponent implements OnInit {
     this.auth.logout();
   }
 
+  showUp() {
+    this.upff = !this.upff;
+  }
+
+  uploadImage() {
+    this.rs.postRequest(this.url_up, this.filUser, this.auth.getCurrentUser(), this.auth.getCurrentAct()).subscribe((data: any) => {
+      console.log('Success');
+      this.showUp();
+    });
+  }
+
+  getFiles(event) {
+    let fileUser: File = event.target.files[0];
+    let mime: string = this.getMimeType(fileUser.name);
+    const blobUser = new Blob([fileUser], { type: mime });
+    this.filUser = blobUser;
+
+  }
+
+  private getMimeType(filename: string): string {
+    if (filename.indexOf('.docx') !== -1) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if (filename.indexOf('.doc') !== -1) return 'application/msword';
+    if (filename.indexOf('.pdf') !== -1) return 'application/pdf';
+    if (filename.indexOf('.png') !== -1) return 'image/png';
+    if (filename.indexOf('.jpeg') !== -1) return "image/jpeg";
+    if (filename.indexOf('.jpg') !== -1) return "image/jpg";
+    return 'text/plain';
+  }
+
+
+  getImg(): any {
+    let framesColl = document.getElementsByTagName('iframe');
+    let framDoc = framesColl[0].contentDocument;
+    let imgs: any = framDoc.getElementsByTagName('img');
+    return imgs;
+  }
+
+  getImgURI(): any {
+    let imgs: any = this.getImg();
+    let imgurl: any = {
+      'b64': [],
+      'static': []
+    };
+    for (let i = 0; i < imgs.length; i++) {
+      imgurl['static'].push(imgs[i].src);
+      imgurl['b64'].push(this.ima.getBase64Image(imgs[i]));
+    }
+    return imgurl;
+  }
+
 
   exportActDocx() {
+    /*let imgs: any = this.getImgURI();
+    let imgsExport: any = this.getImg();
+    for (let i = 0; i < imgsExport.length; i++) {
+      imgsExport[i].src = imgs['b64'][i];
+      console.log(imgsExport[i]);
+    }*/
     let out: any = tinymce.activeEditor.getContent();
     let nameAct: string = 'Acta-' + this.auth.getCurrentAct();
     this.Export2Word(out, nameAct);
@@ -66,7 +138,7 @@ export class TexteditorComponent implements OnInit {
     var postHtml = "</body></html>";
     var html = preHtml + element + postHtml;
     var blob = new Blob(['\ufeff', html], {
-      type: 'application/msword'
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     });
     // Specify link url
     var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
@@ -111,7 +183,7 @@ export class TexteditorComponent implements OnInit {
   }
 
   insertHtml(htmlString) {
-    tinymce.execCommand('mceInsertContent', false, htmlString);
+    tinymce.activeEditor.setContent(htmlString);
   }
 
   onSubmit() {

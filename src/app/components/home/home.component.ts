@@ -36,6 +36,13 @@ export class HomeComponent implements OnInit {
   filterOpt: FormGroup;
 
   ngOnInit() {
+    this.auth.isAct().subscribe((data) => {
+      if (data) {
+        if (this.router.url != '/texteditor') {
+          this.auth.deleteCurrentAct();
+        }
+      }
+    });
     $('select').material_select();
     this.filterOpt = this.fb.group({
       dataOpt: [''],
@@ -131,7 +138,7 @@ export class HomeComponent implements OnInit {
     if (edit) {
       this.rs.getRequest(this.url_search, id_u, id_a).subscribe(
         (data: any) => {
-          this.auth.setCurrentAct(id_a)
+          this.auth.setTempAct(id_a)
           this.router.navigate(['/texteditor'], { relativeTo: this.route });
         });
     } else {

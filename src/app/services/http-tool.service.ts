@@ -27,14 +27,21 @@ export class HttpToolService {
   }
 
 
-  postRequest(url: string, dataEx: any, token?: string){
+  postRequest(url: string, dataEx: any, id_u?: any, id_a?: any, token?: string){
     const config: any = {
       responseType: 'json'
     };
+    let header = new HttpHeaders();
     if (token){
-      const header = new HttpHeaders().set('Authorizaton', `Bearer${token}`);
-      config.headers = header;
+      header = header.append('Authorizaton', `Bearer${token}`);
     }
+    if (id_u) {
+      header = header.set('id_u', id_u);
+    }
+    if (id_a) {
+      header = header.set('id_a', id_a);  
+    }
+    config.headers = header;
     return this.http.post(url, dataEx, config);
   }
 

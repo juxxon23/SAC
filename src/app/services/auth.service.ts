@@ -18,20 +18,30 @@ export class AuthService {
 
   setCurrentAct(act: string): void {
     localStorage.setItem('currentAct', act);
+    this.act.next(true);
+  }
+  setTempAct(act: string) {
+    localStorage.setItem('tempAct', act);
+  }
+  getTempAct(): string {
+    return localStorage.getItem('tempAct');
   }
 
   getCurrentAct(): string {
     return localStorage.getItem('currentAct')
   }
 
-  private deleteCurrentAct(): void {
+  deleteCurrentAct(): void {
     localStorage.removeItem('currentAct');
+    this.act.next(false);
+  }
+  deleteTempAct() {
+    localStorage.removeItem('tempAct');
   }
 
   login(token: string): void {
     localStorage.setItem('tkse', token);
     this.isLogin.next(true);
-
   }
 
   setCurrentUser(user: string): void {
@@ -51,6 +61,7 @@ export class AuthService {
     this.deleteCurrentAct();
     this.deleteCurrentUser();
     this.isLogin.next(false);
+    this.act.next(false)
   }
 
   isLoggedIn(): Observable<boolean> {
