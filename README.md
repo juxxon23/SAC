@@ -1,27 +1,49 @@
 # SAC
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+IBM Watson
+![como registrarme?](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/1.png)
 
-## Development server
+Registro
+![registro](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/2.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Informacion adicional para el registro
+![registro 2](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/3.png)
 
-## Code scaffolding
+Login
+![login](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/4.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Home y buscador de actas
+![home y buscador de actas](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/5.png)
 
-## Build
+Menu lateral de opciones
+![menu de opciones](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/6.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Editar mi perfil
+![editar mi perfil](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/7.png)
 
-## Running unit tests
+Crear acta
+![crear acta](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/8.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Acta de ejemplo con formato especifico
+![acta de ejemplo](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/9.png)
 
-## Running end-to-end tests
+Acta guardada
+![guardar acta](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/10.png)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Adjuntar anexos al acta
+![anexos del acta](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/11.png)
 
-## Further help
+Buscar el acta creada por numero de acta
+![buscar acta por numero](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/12.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Buscar acta por identificacion del creador
+![buscar acta por creador](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/13.png)
+
+Solicitud de edicion del acta desde otra cuenta
+![solicitud de edicion](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/14.png)
+
+Solicitudes de edicion
+![solicitud de edicion](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/15.png)
+
+Descargar acta en .docx
+![acta en .docx](https://raw.githubusercontent.com/juxxon23/SAC/master/src/static/screenshots/16.png)
